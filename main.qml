@@ -1,8 +1,16 @@
-/* This file is generated and only relevant for integrating the project into a Qt 6 and cmake based
-C++ project. */
+import QtQuick 2.6
+import QtQuick.Controls 2.0
 
-import QtQuick
-import content
 
-App {
+ApplicationWindow {
+    id: root
+    width: 300
+    height: 480
+    visible: true
+
+    Button{
+        id: myButton
+        anchors.centerIn: parent
+        onClicked: classA.connectDB()
+    }
 }
