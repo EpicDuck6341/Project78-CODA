@@ -24,4 +24,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     someclass.h
 
+DISTFILES += \
+    LoginPage.qml \
+    MainMenu.qml
+
 

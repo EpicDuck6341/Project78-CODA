@@ -4,13 +4,12 @@ import QtQuick.Controls 2.0
 
 ApplicationWindow {
     id: root
-    width: 300
-    height: 480
+    width: 1920
+    height: 1080
     visible: true
 
-    Button{
-        id: myButton
-        anchors.centerIn: parent
-        onClicked: classA.connectDB()
-    }
+    Loader {
+                id: pageLoader1
+                source: "/LoginPage.qml"
+            }
 }
