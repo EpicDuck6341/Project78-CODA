@@ -7,9 +7,13 @@ ApplicationWindow {
     width: 1920
     height: 1080
     visible: true
-
+  StackView {
+      id: stackView
     Loader {
+
+
                 id: pageLoader1
-                source: "/LoginPage.qml"
+                source: "LoginPage.qml"
             }
+  }
 }

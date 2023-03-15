@@ -40,9 +40,7 @@ Page{
             text: "Submit"
 
             //Function voor SubmitButton
-            function submitButtonClicked() {
-                //Connect met database
-                onClicked: classA.connectDB()
+            function submitButtonClicked() {             
 
                 var username = loginFieldUser.readInput()
                 var password = loginFieldPass.readInput()
@@ -68,6 +66,17 @@ Page{
 
             onClicked: submitButtonClicked()
         }
+
+        //Connect with database and insert row
+        Button {
+            id: databaseButton
+            x: 920
+            y: 700
+            width: 80
+            text: "Connect"
+            onClicked: classA.connectDB()
+        }
+
 
         //Textfield voor de Username
         TextField {
