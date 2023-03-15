@@ -27,85 +27,88 @@ Page{
             console.log("Error loading component:", pageObject.errorString())
         }
     }
+
+
     Rectangle {
-        id: page1
+        id: rectangle
         width: 1920
         height: 1080
-        Image {
-            id: image
-            x: 0
-            y: 0
-            width: 1937
-            height: 1091
-            source: "blue.jpg"
-            sourceSize.height: 1080
-            sourceSize.width: 1920
-            fillMode: Image.PreserveAspectFit
-        }
-
-        Text {
-            id: loginText
-            x: 900
-            y: 450
-            text: qsTr("Login")
-            font.pixelSize: 48
-            horizontalAlignment: Text.AlignHCenter
-        }
-
-        //Button voor Username en Password submitten
-        Button {
-            id: submitButton
-            x: 920
-            y: 645
-            width: 80
-            text: "Submit"
-            onClicked: switchPage("Dashboard.qml")
-        }
-
-        //Connect with database and insert row
-        Button {
-            id: databaseButton
-            x: 920
-            y: 700
-            width: 80
-            text: "Connect"
-            onClicked: classA.connectDB()
-        }
+        color: "#3b3a4a"
+        property alias roundedRectBordercolor: roundedRect.border.color
 
 
-        //Textfield voor de Username
-        TextField {
-            id: loginFieldUser
-            x: 859
-            y: 536
-            width: 200
-            height: 37
-            placeholderText: qsTr("Username")
+         Rectangle {
+            id: roundedRect
+            anchors.centerIn: parent
+            width: 512
+            height: 834
+            color: "#161626"
+            border.color: "#161626"
+            antialiasing: true
+            radius: 50
 
-            function readInput() {
-                var input = loginFieldUser.text
-                loginFieldUser.clear()
-                return input
+            Image {
+                id: image
+                anchors.horizontalCenter: parent.horizontalCenter
+                y: 95
+                width: 238
+                height: 216
+                source: "Logo.png"
+                fillMode: Image.PreserveAspectFit
             }
-        }
 
-        //Textfield voor de Password
-        TextField {
-            id: loginFieldPass
-            x: 859
-            y: 587
-            width: 200
-            height: 37
-            horizontalAlignment: Text.AlignLeft
-            placeholderText: qsTr("Password")
+            TextField {
+                id: usernameInput
+                anchors.horizontalCenter: parent.horizontalCenter
+                y: 400
+                width: 210
+                height: 45
+                opacity: 1
+                placeholderText: "Username"
+                placeholderTextColor: "#0d0d0d"
+                hoverEnabled: true
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.family: "Roboto"
+                font.pointSize: 12
+                font.bold: true
+            }
 
-            function readInput() {
-                var input = loginFieldPass.text
-                loginFieldPass.clear()
-                return input
+            TextField {
+                id: passwordInput
+                anchors.horizontalCenter: parent.horizontalCenter
+                y: 460
+                width: 210
+                height: 45
+                opacity: 1
+                placeholderText: "Password"
+                placeholderTextColor: "#0d0d0d"
+                hoverEnabled: true
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.family: "Roboto"
+                font.pointSize: 12
+                font.bold: true
+            }
+
+            Button {
+                id: button
+                anchors.horizontalCenter: parent.horizontalCenter
+                y: 550
+                width: 150
+                height: 45
+                text: qsTr("Login")
+                display: AbstractButton.TextOnly
+                highlighted: false
+                flat: false
+                font.family: "Roboto"
+                font.pointSize: 12
+                font.bold: true
+                onClicked: switchPage("Dashboard.qml")
             }
         }
     }
+
 }
 
 
