@@ -6,7 +6,7 @@ SOURCES += \
         main.cpp \
         someclass.cpp
 
-resources.files = main.qml LoginPage.qml MainMenu.qml blue.jpg settings.png user.png graph.png logs.png command.png dashboard.png xdd.png exit.png SideBar.qml
+resources.files = main.qml Login.qml Dashboard.qml blue.jpg settings.png user.png graph.png logs.png command.png dashboard.png xdd.png exit.png SideBar.qml Settings.qml Commands.qml Graphs.qml User.qml Logs.qml
 resources.prefix = /$${TARGET}
 RESOURCES += resources
 
@@ -25,8 +25,13 @@ HEADERS += \
     someclass.h
 
 DISTFILES += \
-    LoginPage.qml \
-    MainMenu.qml \
-    SideBar.qml
+    Commands.qml \
+    Dashboard.qml \
+    Graphs.qml \
+    Login.qml \
+    Logs.qml \
+    Settings.qml \
+    SideBar.qml \
+    User.qml
 
 

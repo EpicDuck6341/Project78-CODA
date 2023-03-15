@@ -11,7 +11,7 @@ ApplicationWindow {
       id: stackView
     Loader {
                 id: pageLoader1
-                source: "LoginPage.qml"
+                source: "Login.qml"
             }
   }
 }

@@ -24,7 +24,7 @@ Column {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    // do something
+                    switchPage("Dashboard.qml")
                 }
             }
         }
@@ -37,7 +37,7 @@ Column {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    // do something
+                   switchPage("Commands.qml")
                 }
             }
         }
@@ -50,7 +50,7 @@ Column {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    // do something
+                    switchPage("Logs.qml")
                 }
             }
         }
@@ -63,7 +63,7 @@ Column {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    // do something
+                   switchPage("Graphs.qml")
                 }
             }
         }
@@ -76,7 +76,7 @@ Column {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    // do something
+                    switchPage("User.qml")
                 }
             }
         }
@@ -91,7 +91,7 @@ Column {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    // do something
+                   switchPage("Settings.qml")
                 }
             }
         }
@@ -103,7 +103,7 @@ Column {
             height: 60
             MouseArea {
                 anchors.fill: parent
-                onClicked: switchPage("LoginPage.qml")
+                onClicked: switchPage("Login.qml")
             }
         }
 }
