@@ -5,7 +5,28 @@ import QtQuick.Controls 2.15
 
 
 
+
 Page{
+    function switchPage(page) {
+
+        // Laad het object van een page in een variabele
+        var pageObject = Qt.createComponent(page)
+
+        // Check of het object succesvol is gemaakt
+        if (pageObject.status === Component.Ready) {
+            // Haal het object op uit de creatiecomponent
+            var page = pageObject.createObject(stackView)
+
+            // Als het object succesvol is gemaakt, ga naar de tweede pagina
+            if (page !== null) {
+                stackView.push(page)
+            } else {
+                console.log("Error creating object from component")
+            }
+        } else {
+            console.log("Error loading component:", page1Object.errorString())
+        }
+    }
     Rectangle {
         id: page1
         width: 1920
@@ -38,33 +59,7 @@ Page{
             y: 645
             width: 80
             text: "Submit"
-
-            //Function voor SubmitButton
-            function submitButtonClicked() {             
-
-                var username = loginFieldUser.readInput()
-                var password = loginFieldPass.readInput()
-
-                // Laad het object van Page2.qml in een variabele
-                var page2Object = Qt.createComponent("MainMenu.qml")
-
-                // Check of het object succesvol is gemaakt
-                if (page2Object.status === Component.Ready) {
-                    // Haal het object op uit de creatiecomponent
-                    var page2 = page2Object.createObject(stackView)
-
-                    // Als het object succesvol is gemaakt, ga naar de tweede pagina
-                    if (page2 !== null) {
-                        stackView.push(page2)
-                    } else {
-                        console.log("Error creating object from component")
-                    }
-                } else {
-                    console.log("Error loading component:", page2Object.errorString())
-                }
-            }
-
-            onClicked: submitButtonClicked()
+            onClicked: switchPage("MainMenu.qml")
         }
 
         //Connect with database and insert row

@@ -10,10 +10,9 @@ ApplicationWindow {
   StackView {
       id: stackView
     Loader {
-
-
                 id: pageLoader1
                 source: "LoginPage.qml"
             }
   }
 }
+
