@@ -6,7 +6,7 @@ Row {
     x: 30
     y: 30
     Image {
-        source: "Logo.png"
+        source: "../assets/Logo.png"
         width: 130
         height: 80
     }
@@ -18,7 +18,7 @@ Column {
     spacing: 52
     Row {
         Image {
-            source: "dashboardWhite.png"
+            source: "../assets/dashboardWhite.png"
             width: 60
             height: 60
             MouseArea {
@@ -31,7 +31,7 @@ Column {
     }
     Row {
         Image {
-            source: "commandWhite.png"
+            source: "../assets/commandWhite.png"
             width: 60
             height: 60
             MouseArea {
@@ -44,7 +44,7 @@ Column {
     }
     Row {
         Image {
-            source: "logsWhite.png"
+            source: "../assets/logsWhite.png"
             width: 60
             height: 60
             MouseArea {
@@ -57,7 +57,7 @@ Column {
     }
     Row {
         Image {
-            source: "graphWhite.png"
+            source: "../assets/graphWhite.png"
             width: 60
             height: 60
             MouseArea {
@@ -70,7 +70,7 @@ Column {
     }
     Row {
         Image {
-            source: "userWhite.png"
+            source: "../assets/userWhite.png"
             width: 60
             height: 60
             MouseArea {
@@ -85,7 +85,7 @@ Column {
     }
     Row {
         Image {
-            source: "settingsWhite.png"
+            source: "../assets/settingsWhite.png"
             width: 60
             height: 60
             MouseArea {
@@ -98,7 +98,7 @@ Column {
 }
     Row {
         Image {
-            source: "exitWhite.png"
+            source: "../assets/exitWhite.png"
             width: 60
             height: 60
             MouseArea {

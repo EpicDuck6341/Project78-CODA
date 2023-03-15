@@ -54,7 +54,7 @@ Page{
                 y: 95
                 width: 238
                 height: 216
-                source: "Logo.png"
+                source: "../assets/Logo.png"
                 fillMode: Image.PreserveAspectFit
             }
 

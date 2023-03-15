@@ -3,7 +3,7 @@
 #include <QDebug>
 
 const QDir projectPath = QDir::currentPath();
-const QString Database_path = projectPath.absolutePath() + "/database.db";
+const QString Database_path = projectPath.absolutePath() + "../database.db";
 
 SomeClass::SomeClass(QObject *parent)
     : QObject{parent}

@@ -3,10 +3,10 @@ QT += core gui sql
 
 
 SOURCES += \
-        main.cpp \
-        someclass.cpp
+        cpp/main.cpp \
+        cpp/someclass.cpp
 
-resources.files = main.qml Login.qml Dashboard.qml settings.png user.png graph.png logs.png command.png dashboard.png exit.png SideBar.qml Settings.qml Commands.qml Graphs.qml User.qml Logs.qml Logo.png exitWhite.png commandWhite.png dashboardWhite.png graphWhite.png LogoBlack.png logsWhite.png settingsWhite.png userWhite.png
+resources.files = qml/main.qml qml/Login.qml qml/Dashboard.qml assets/settings.png assets/user.png assets/graph.png assets/logs.png assets/command.png assets/dashboard.png assets/exit.png qml/SideBar.qml qml/Settings.qml qml/Commands.qml qml/Graphs.qml qml/User.qml qml/Logs.qml assets/Logo.png assets/exitWhite.png assets/commandWhite.png assets/dashboardWhite.png assets/graphWhite.png assets/LogoBlack.png assets/logsWhite.png assets/settingsWhite.png assets/userWhite.png
 resources.prefix = /$${TARGET}
 RESOURCES += resources
 
@@ -22,16 +22,16 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    someclass.h
+    cpp/someclass.h
 
 DISTFILES += \
-    Commands.qml \
-    Dashboard.qml \
-    Graphs.qml \
-    Login.qml \
-    Logs.qml \
-    Settings.qml \
-    SideBar.qml \
-    User.qml
+    qml/Commands.qml \
+    qml/Dashboard.qml \
+    qml/Graphs.qml \
+    qml/Login.qml \
+    qml/Logs.qml \
+    qml/Settings.qml \
+    qml/SideBar.qml \
+    qml/User.qml
 
 

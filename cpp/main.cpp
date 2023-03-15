@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     SomeClass testClass;
 
     QQmlApplicationEngine engine;
-    const QUrl url(u"qrc:/GUI/main.qml"_qs);
+    const QUrl url(u"qrc:/GUI/qml/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
