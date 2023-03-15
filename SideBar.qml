@@ -3,12 +3,12 @@ import QtQuick 2.0
 Item{
   id: sideBar
 Row {
-    x: 45
+    x: 30
     y: 30
     Image {
-        source: "xdd.png"
-        width: 60
-        height: 60
+        source: "Logo.png"
+        width: 130
+        height: 80
     }
 }
 
@@ -18,7 +18,7 @@ Column {
     spacing: 52
     Row {
         Image {
-            source: "dashboard.png"
+            source: "dashboardWhite.png"
             width: 60
             height: 60
             MouseArea {
@@ -31,7 +31,7 @@ Column {
     }
     Row {
         Image {
-            source: "command.png"
+            source: "commandWhite.png"
             width: 60
             height: 60
             MouseArea {
@@ -44,7 +44,7 @@ Column {
     }
     Row {
         Image {
-            source: "logs.png"
+            source: "logsWhite.png"
             width: 60
             height: 60
             MouseArea {
@@ -57,7 +57,7 @@ Column {
     }
     Row {
         Image {
-            source: "graph.png"
+            source: "graphWhite.png"
             width: 60
             height: 60
             MouseArea {
@@ -70,7 +70,7 @@ Column {
     }
     Row {
         Image {
-            source: "user.png"
+            source: "userWhite.png"
             width: 60
             height: 60
             MouseArea {
@@ -85,7 +85,7 @@ Column {
     }
     Row {
         Image {
-            source: "settings.png"
+            source: "settingsWhite.png"
             width: 60
             height: 60
             MouseArea {
@@ -98,12 +98,12 @@ Column {
 }
     Row {
         Image {
-            source: "exit.png"
+            source: "exitWhite.png"
             width: 60
             height: 60
             MouseArea {
                 anchors.fill: parent
-                onClicked: switchPage("Login.qml")
+                onClicked: switchPage("LoginWhite.qml")
             }
         }
 }

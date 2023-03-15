@@ -47,6 +47,7 @@ Page{
             antialiasing: true
             radius: 50
 
+
             Image {
                 id: image
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -72,6 +73,12 @@ Page{
                 font.family: "Roboto"
                 font.pointSize: 12
                 font.bold: true
+                background: Rectangle {
+                    color: "#d9d9d9"
+                    border.width: 2
+                    border.color: "#161626"
+                    radius: 10
+                }
             }
 
             TextField {
@@ -89,23 +96,34 @@ Page{
                 font.family: "Roboto"
                 font.pointSize: 12
                 font.bold: true
+                background: Rectangle {
+                    color: "#d9d9d9"
+                    border.width: 2
+                    border.color: "#161626"
+                    radius: 10
+                }
             }
 
             Button {
-                id: button
-                anchors.horizontalCenter: parent.horizontalCenter
-                y: 550
-                width: 150
-                height: 45
-                text: qsTr("Login")
-                display: AbstractButton.TextOnly
-                highlighted: false
-                flat: false
-                font.family: "Roboto"
-                font.pointSize: 12
-                font.bold: true
-                onClicked: switchPage("Dashboard.qml")
-            }
+                            id: button
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            flat: true
+                            y: 550
+                            width: 150
+                            height: 45
+                            text: qsTr("Login")
+                            display: AbstractButton.TextOnly
+                            background: Rectangle {
+                                color: "#a0a0a0"
+                                border.width: 2
+                                border.color: "#161626"
+                                radius: 10
+                            }
+                            font.family: "Roboto"
+                            font.pointSize: 12
+                            font.bold: true
+                            onClicked: switchPage("Dashboard.qml")
+                        }
         }
     }
 

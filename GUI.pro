@@ -6,7 +6,7 @@ SOURCES += \
         main.cpp \
         someclass.cpp
 
-resources.files = main.qml Login.qml Dashboard.qml blue.jpg settings.png user.png graph.png logs.png command.png dashboard.png xdd.png exit.png SideBar.qml Settings.qml Commands.qml Graphs.qml User.qml Logs.qml Logo.png
+resources.files = main.qml Login.qml Dashboard.qml blue.jpg settings.png user.png graph.png logs.png command.png dashboard.png xdd.png exit.png SideBar.qml Settings.qml Commands.qml Graphs.qml User.qml Logs.qml Logo.png exitWhite.png commandWhite.png dashboardWhite.png graphWhite.png LogoBlack.png logsWhite.png settingsWhite.png userWhite.png
 resources.prefix = /$${TARGET}
 RESOURCES += resources
 

@@ -9,7 +9,8 @@ Page{
     id: page2
     width: 1920
     height: 1080
-    color: "#e5e6eb"
+    color: "#3b3a4a"
+
 
     Loader {
                 id: sideBar

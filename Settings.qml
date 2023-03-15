@@ -6,10 +6,11 @@ import QtQuick.Controls 2.15
 
 Page{
     Rectangle {
-    id: page2
+    id: page
     width: 1920
     height: 1080
-    color: "#e5e6eb"
+    color: "#3b3a4a"
+
 
     Loader {
                 id: sideBar
