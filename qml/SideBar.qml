@@ -6,7 +6,7 @@ Row {
     x: 30
     y: 30
     Image {
-        source: "../assets/Logo.png"
+        source: classA.getPath("../assets/Logo")
         width: 130
         height: 80
     }
@@ -18,7 +18,7 @@ Column {
     spacing: 52
     Row {
         Image {
-            source: "../assets/dashboardWhite.png"
+            source:classA.getPath("../assets/dashboard")
             width: 60
             height: 60
             MouseArea {
@@ -31,7 +31,7 @@ Column {
     }
     Row {
         Image {
-            source: "../assets/commandWhite.png"
+            source: classA.getPath("../assets/command")
             width: 60
             height: 60
             MouseArea {
@@ -44,7 +44,7 @@ Column {
     }
     Row {
         Image {
-            source: "../assets/logsWhite.png"
+            source: classA.getPath("../assets/logs")
             width: 60
             height: 60
             MouseArea {
@@ -57,7 +57,7 @@ Column {
     }
     Row {
         Image {
-            source: "../assets/graphWhite.png"
+            source: classA.getPath("../assets/graph")
             width: 60
             height: 60
             MouseArea {
@@ -70,7 +70,7 @@ Column {
     }
     Row {
         Image {
-            source: "../assets/userWhite.png"
+            source: classA.getPath("../assets/user")
             width: 60
             height: 60
             MouseArea {
@@ -85,7 +85,7 @@ Column {
     }
     Row {
         Image {
-            source: "../assets/settingsWhite.png"
+            source: classA.getPath("../assets/settings")
             width: 60
             height: 60
             MouseArea {
@@ -98,12 +98,12 @@ Column {
 }
     Row {
         Image {
-            source: "../assets/exitWhite.png"
+            source: classA.getPath("../assets/exit")
             width: 60
             height: 60
             MouseArea {
                 anchors.fill: parent
-                onClicked: switchPage("LoginWhite.qml")
+                onClicked: switchPage("Login.qml")
             }
         }
 }

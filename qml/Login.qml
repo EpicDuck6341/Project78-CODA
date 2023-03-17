@@ -33,7 +33,7 @@ Page{
         id: rectangle
         width: 1920
         height: 1080
-        color: "#3b3a4a"
+        color: classA.getColourComponent(0)
         property alias roundedRectBordercolor: roundedRect.border.color
 
 
@@ -42,8 +42,8 @@ Page{
             anchors.centerIn: parent
             width: 512
             height: 834
-            color: "#161626"
-            border.color: "#161626"
+            color:classA.getColourComponent(1)
+            border.color: classA.getColourComponent(1)
             antialiasing: true
             radius: 50
 
@@ -54,7 +54,7 @@ Page{
                 y: 95
                 width: 238
                 height: 216
-                source: "../assets/Logo.png"
+                source: classA.getPath("../assets/Logo")
                 fillMode: Image.PreserveAspectFit
             }
 
@@ -84,6 +84,7 @@ Page{
             TextField {
                 id: passwordInput
                 anchors.horizontalCenter: parent.horizontalCenter
+                echoMode: TextInput.Password
                 y: 460
                 width: 210
                 height: 45

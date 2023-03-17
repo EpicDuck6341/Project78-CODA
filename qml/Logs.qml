@@ -9,7 +9,7 @@ Page{
     id: page2
     width: 1920
     height: 1080
-    color: "#3b3a4a"
+    color: classA.getColourComponent(0)
 
 
     Loader {
