@@ -7,6 +7,7 @@ import QtQuick.Controls 2.15
 
 
 Page{
+
     function switchPage(pageInput) {
 
         // Laad het object van een page in een variabele
@@ -33,6 +34,9 @@ Page{
         if(classA.getUserLogin(usernameInput.text,passwordInput.text)===true){
              switchPage("Dashboard.qml")
         }
+        else{
+        errorMessage.text = "Username and/or password are wrong"
+    }
     }
 
 
@@ -63,6 +67,14 @@ Page{
                 height: 216
                 source: classA.getPath("../assets/Logo")
                 fillMode: Image.PreserveAspectFit
+            }
+
+            Text {
+                id: errorMessage
+                anchors.horizontalCenter: parent.horizontalCenter
+                y: 350
+                color: "#FF0000"
+                font.pixelSize: 18
             }
 
             TextField {
