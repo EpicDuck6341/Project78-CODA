@@ -9,12 +9,12 @@ Page{
     function switchColour(){
         //Set Bright
         if(classA.getColourComponent(0)==="#3b3a4a"){
-            classA.setColourComponent(0,"#FF0000")
-            classA.setColourComponent(1,"#FF0000")
+            classA.setColourComponent(0,"#9695ab")
+            classA.setColourComponent(1,"#7070AC")
             classA.setColourComponent(2,".png")
         }
         //Set Dark
-        else if(classA.getColourComponent(0)==="#dddddd"){
+        else if(classA.getColourComponent(0)==="#9695ab"){
             classA.setColourComponent(0,"#3b3a4a")
             classA.setColourComponent(1,"#161626")
             classA.setColourComponent(2,"White.png")

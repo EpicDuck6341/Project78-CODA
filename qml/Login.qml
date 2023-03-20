@@ -12,6 +12,7 @@ Page{
         // Laad het object van een page in een variabele
         var pageObject = Qt.createComponent(pageInput)
 
+
         // Check of het object succesvol is gemaakt
         if (pageObject.status === Component.Ready) {
             // Haal het object op uit de creatiecomponent
@@ -25,6 +26,12 @@ Page{
             }
         } else {
             console.log("Error loading component:", pageObject.errorString())
+        }
+    }
+
+    function checkLogin(){
+        if(classA.getUserLogin(usernameInput.text,passwordInput.text)===true){
+             switchPage("Dashboard.qml")
         }
     }
 
@@ -123,7 +130,7 @@ Page{
                             font.family: "Roboto"
                             font.pointSize: 12
                             font.bold: true
-                            onClicked: switchPage("Dashboard.qml")
+                            onClicked: checkLogin()
                         }
         }
     }

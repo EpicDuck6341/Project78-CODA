@@ -17,9 +17,9 @@ public:
 
 signals:
 
-public slots:
-    void callMe();
+public slots:    
     void connectDB();
+    bool getUserLogin(QString username,QString password);
     void setColourComponent(int index, QString value){
         componentArray[index] = value;
     }
