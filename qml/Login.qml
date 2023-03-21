@@ -35,6 +35,8 @@ Page{
              switchPage("Dashboard.qml")
         }
         else{
+        usernameInput.clear()
+        passwordInput.clear()
         errorMessage.text = "Username and/or password are wrong"
     }
     }
@@ -79,6 +81,7 @@ Page{
 
             TextField {
                 id: usernameInput
+                onTextChanged: if (length > 15) remove(15, length);
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: 400
                 width: 210
@@ -102,6 +105,7 @@ Page{
 
             TextField {
                 id: passwordInput
+                onTextChanged: if (length > 15) remove(15, length);
                 anchors.horizontalCenter: parent.horizontalCenter
                 echoMode: TextInput.Password
                 y: 460
