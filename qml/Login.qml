@@ -57,7 +57,8 @@ Page{
             width: 512
             height: 834
             color:classA.getColourComponent(1)
-            border.color: classA.getColourComponent(1)
+            border.color: classA.getColourComponent(3)
+            border.width:  1
             antialiasing: true
             radius: 50
 

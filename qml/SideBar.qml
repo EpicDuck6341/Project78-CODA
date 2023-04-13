@@ -13,20 +13,20 @@ Row {
     y: 30
     Image {
         source: classA.getPath("../assets/Logo")
-        width: 130
-        height: 80
+        width: 100
+        height: 60
     }
 }
 
 Column {
     x: 45
-    y: 220
-    spacing: 52
+    y: 145
+    spacing: 40
     Row {
         Image {
             source:classA.getPath("../assets/dashboard")
-            width: 60
-            height: 60
+            width: 45
+            height: 45
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
@@ -38,8 +38,8 @@ Column {
     Row {
         Image {
             source: classA.getPath("../assets/command")
-            width: 60
-            height: 60
+            width: 45
+            height: 45
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
@@ -51,8 +51,8 @@ Column {
     Row {
         Image {
             source: classA.getPath("../assets/logs")
-            width: 60
-            height: 60
+            width: 45
+            height: 45
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
@@ -64,8 +64,8 @@ Column {
     Row {
         Image {
             source: classA.getPath("../assets/graph")
-            width: 60
-            height: 60
+            width: 45
+            height: 45
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
@@ -77,8 +77,8 @@ Column {
     Row {
         Image {
             source: classA.getPath("../assets/user")
-            width: 60
-            height: 60
+            width: 45
+            height: 45
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
@@ -92,8 +92,8 @@ Column {
     Row {
         Image {
             source: classA.getPath("../assets/settings")
-            width: 60
-            height: 60
+            width: 45
+            height: 45
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
@@ -105,8 +105,8 @@ Column {
     Row {
         Image {
             source: classA.getPath("../assets/exit")
-            width: 60
-            height: 60
+            width: 45
+            height: 45
             MouseArea {
                 anchors.fill: parent
                 onClicked: logout()

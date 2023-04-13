@@ -13,9 +13,9 @@ class SomeClass : public QObject
 public:
     QString currentUser;
     explicit SomeClass(QObject *parent = nullptr);
-    QString componentArray[3] = {"#3b3a4a","#161626","White.png"};
+    QString componentArray[4] = {"#FEFEFA","#FFF5EE",".png","#000000"};
     std::vector<QString> commands;
-    bool buttonState = false;  //Delaybutton state for page switching
+    bool buttonState[5] = {false,false,false,false,false};  //Delaybutton state for page switching
     int currentIndex;//Combobox index
 
 
@@ -34,11 +34,11 @@ public slots:
     QString getCurrentUser(){
         return currentUser;
     }
-    void setButtonState(bool state){
-        buttonState =  state;
+    void setButtonState(bool state,int index){
+        buttonState[index] =  state;
     }
-    bool getButtonState(){
-        return buttonState;
+    bool getButtonState(int index){
+        return buttonState[index];
     }
 
     void connectDB();

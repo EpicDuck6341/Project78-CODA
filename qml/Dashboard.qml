@@ -10,6 +10,23 @@ Page{
     width: 1920
     height: 1080
     color: classA.getColourComponent(0)
+    Rectangle{
+        anchors.centerIn: parent
+        width: 1000
+        height: 800
+        color:classA.getColourComponent(1)
+        border.color: classA.getColourComponent(3)
+        antialiasing: true
+        radius: 50
+        Rectangle{
+            x:160
+            width:2
+            height:800
+             color: classA.getColourComponent(3)
+
+        }
+
+
 
     Loader {
                 id: sideBar
@@ -17,14 +34,14 @@ Page{
             }
 
     Text {
-        id: dashboarText
-        x: 900
-        y: 450
+        id: dashboardText
+     x:500
         text: qsTr("Dashboard")
         font.pixelSize: 48
         horizontalAlignment: Text.AlignHCenter
+        color :classA.getColourComponent(3)
     }
 }
-
 }
 
+}

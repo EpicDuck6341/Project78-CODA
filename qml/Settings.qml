@@ -8,16 +8,18 @@ Page{
 
     function switchColour(){
         //Set Bright
-        if(classA.getColourComponent(0)==="#3b3a4a"){
+        if(classA.getColourComponent(0)==="#110c11"){
             classA.setColourComponent(0,"#9695ab")
             classA.setColourComponent(1,"#7070AC")
             classA.setColourComponent(2,".png")
+             classA.setColourComponent(3,"#000000")
         }
         //Set Dark
-        else if(classA.getColourComponent(0)==="#9695ab"){
-            classA.setColourComponent(0,"#3b3a4a")
-            classA.setColourComponent(1,"#161626")
+        else if(classA.getColourComponent(0)==="#FEFEFA"){
+            classA.setColourComponent(0,"#040406")
+            classA.setColourComponent(1,"#110c11")
             classA.setColourComponent(2,"White.png")
+             classA.setColourComponent(3,"#ffffff")
         }
         switchPage("Settings.qml")
     }
@@ -27,6 +29,21 @@ Page{
     width: 1920
     height: 1080
     color: classA.getColourComponent(0)
+    Rectangle{
+        anchors.centerIn: parent
+        width: 1000
+        height: 800
+        color:classA.getColourComponent(1)
+       border.color:  classA.getColourComponent(3)
+        antialiasing: true
+        radius: 50
+        Rectangle{
+            x:160
+            width:2
+            height:800
+             color: classA.getColourComponent(3)
+
+        }
 
     Loader {
                 id: sideBar
@@ -35,11 +52,11 @@ Page{
 
     Text {
         id: loginText
-        x: 900
-        y: 450
+        x:500
         text: "Settings"
         font.pixelSize: 48
         horizontalAlignment: Text.AlignHCenter
+        color: classA.getColourComponent(3)
     }
         Button {
                         id: button
@@ -63,6 +80,6 @@ Page{
                     }
     }
 }
-
+}
 
 

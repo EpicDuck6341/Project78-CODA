@@ -81,7 +81,6 @@ QString SomeClass::getCommandName(int index){
         return "";
     }
     QString name = commands[index];
-    qDebug() << name;
     return name;
 }
 
