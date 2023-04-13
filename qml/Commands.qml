@@ -75,7 +75,7 @@ Page{
            ]
            background: Rectangle {
 
-                     color: "orange"
+                     color: "white"
                       border.width: 1
                       border.color: "gray"
                       radius: 3
@@ -114,7 +114,7 @@ Page{
             implicitWidth: 100
             implicitHeight: 100
             opacity: enabled ? 1 : 0.3
-            color: control.down ? "grey" : "orange"
+            color: control.down ? "grey" : "white"
             radius: size / 2
 
             readonly property real size: Math.min(control.width, control.height)
@@ -147,6 +147,9 @@ Page{
         onActivated: {
                         classA.setButtonState(true)
                     }
+        onClicked:{
+            console.log("dsds")
+        }
     }
     DelayButton {
         id: control2
@@ -177,7 +180,7 @@ Page{
             implicitWidth: 100
             implicitHeight: 100
             opacity: enabled ? 1 : 0.3
-            color: control2.down ? "grey" : "orange"
+            color: control2.down ? "grey" : "white"
             radius: size / 2
 
             readonly property real size: Math.min(control2.width, control2.height)
@@ -239,7 +242,7 @@ Page{
             implicitWidth: 100
             implicitHeight: 100
             opacity: enabled ? 1 : 0.3
-            color: control3.down ? "grey" : "orange"
+            color: control3.down ? "grey" : "white"
             radius: size / 2
 
             readonly property real size: Math.min(control3.width, control3.height)
@@ -302,7 +305,7 @@ Page{
             implicitWidth: 100
             implicitHeight: 100
             opacity: enabled ? 1 : 0.3
-            color: control4.down ? "grey" : "orange"
+            color: control4.down ? "grey" : "white"
             radius: size / 2
 
             readonly property real size: Math.min(control4.width, control4.height)
@@ -366,7 +369,7 @@ Page{
             implicitWidth: 100
             implicitHeight: 100
             opacity: enabled ? 1 : 0.3
-            color: control5.down ? "grey" : "orange"
+            color: control5.down ? "grey" : "white"
             radius: size / 2
 
             readonly property real size: Math.min(control5.width, control5.height)
