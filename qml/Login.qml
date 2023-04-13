@@ -147,7 +147,7 @@ Page{
                             font.family: "Roboto"
                             font.pointSize: 12
                             font.bold: true
-                            onClicked: checkLogin()
+                            onClicked: classA.findCommands("rocketA")
                         }
         }
     }
