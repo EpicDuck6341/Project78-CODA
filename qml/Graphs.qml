@@ -10,6 +10,13 @@ Page{
     width: 1920
     height: 1080
     color: classA.getColourComponent(0)
+    Image {
+        id: imageBG
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: 1920
+        height: 1080
+        source: classA.getPath("../assets/background")
+    }
     Rectangle{
         anchors.centerIn: parent
         width: 1000
@@ -37,7 +44,7 @@ Page{
         text: qsTr("Graphs")
         font.pixelSize: 48
         horizontalAlignment: Text.AlignHCenter
-         color :classA.getColourComponent(3)
+         color :classA.getColourComponent(4)
     }
 }
 }

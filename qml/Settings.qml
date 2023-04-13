@@ -8,18 +8,23 @@ Page{
 
     function switchColour(){
         //Set Bright
-        if(classA.getColourComponent(0)==="#110c11"){
-            classA.setColourComponent(0,"#9695ab")
-            classA.setColourComponent(1,"#7070AC")
+        if(classA.getColourComponent(0)==="#010105"){
+            classA.setColourComponent(0,"#FEFEFA")
+            classA.setColourComponent(1,"#ECEFF1")
             classA.setColourComponent(2,".png")
-             classA.setColourComponent(3,"#000000")
+            classA.setColourComponent(3,"#B0BEC5")
+            classA.setColourComponent(4,"#757575")
+            classA.setColourComponent(5,"#B0BEC5")
+
         }
         //Set Dark
         else if(classA.getColourComponent(0)==="#FEFEFA"){
-            classA.setColourComponent(0,"#040406")
-            classA.setColourComponent(1,"#110c11")
+            classA.setColourComponent(0,"#010105")
+            classA.setColourComponent(1,"#121212")
             classA.setColourComponent(2,"White.png")
-             classA.setColourComponent(3,"#ffffff")
+            classA.setColourComponent(3,"#3b3b3b")
+            classA.setColourComponent(4,"#B0BEC5")
+            classA.setColourComponent(5,"#B0BEC5")
         }
         switchPage("Settings.qml")
     }
@@ -29,12 +34,19 @@ Page{
     width: 1920
     height: 1080
     color: classA.getColourComponent(0)
+    Image {
+        id: imageBG
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: 1920
+        height: 1080
+        source: classA.getPath("../assets/background")
+    }
     Rectangle{
         anchors.centerIn: parent
         width: 1000
         height: 800
         color:classA.getColourComponent(1)
-       border.color:  classA.getColourComponent(3)
+        border.color:  classA.getColourComponent(3)
         antialiasing: true
         radius: 50
         Rectangle{
@@ -56,7 +68,7 @@ Page{
         text: "Settings"
         font.pixelSize: 48
         horizontalAlignment: Text.AlignHCenter
-        color: classA.getColourComponent(3)
+        color: classA.getColourComponent(4)
     }
         Button {
                         id: button

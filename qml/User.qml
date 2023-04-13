@@ -11,6 +11,13 @@ Page{
     width: 1920
     height: 1080
     color: classA.getColourComponent(0)
+    Image {
+        id: imageBG
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: 1920
+        height: 1080
+        source: classA.getPath("../assets/background")
+    }
 
 
     Rectangle{
@@ -35,7 +42,7 @@ Page{
             text: qsTr("User")
             font.pixelSize: 48
             x:500
-            color :classA.getColourComponent(3)
+            color :classA.getColourComponent(4)
 
 
         }

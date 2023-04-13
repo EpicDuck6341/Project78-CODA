@@ -44,19 +44,28 @@ Page{
 
 
     Rectangle {
+
         id: rectangle
         width: 1920
         height: 1080
-        color: classA.getColourComponent(0)
+        color: "#F5F5F5"
         property alias roundedRectBordercolor: roundedRect.border.color
 
+        Image {
+            id: imageBG
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 1920
+            height: 1080
+            source: classA.getPath("../assets/background")
+        }
 
-         Rectangle {
+
+        Rectangle {
             id: roundedRect
             anchors.centerIn: parent
             width: 512
             height: 834
-            color:classA.getColourComponent(1)
+            color: classA.getColourComponent(1)
             border.color: classA.getColourComponent(3)
             border.width:  1
             antialiasing: true
@@ -90,7 +99,7 @@ Page{
                 height: 45
                 opacity: 1
                 placeholderText: "Username"
-                placeholderTextColor: "#0d0d0d"
+                placeholderTextColor: classA.getColourComponent(4)
                 hoverEnabled: true
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -98,9 +107,9 @@ Page{
                 font.pointSize: 12
                 font.bold: true
                 background: Rectangle {
-                    color: "#d9d9d9"
-                    border.width: 2
-                    border.color: "#161626"
+                    color: "#F5F5F5"
+                    border.width: 1
+                    border.color: "#B0BEC5"
                     radius: 10
                 }
             }
@@ -115,7 +124,7 @@ Page{
                 height: 45
                 opacity: 1
                 placeholderText: "Password"
-                placeholderTextColor: "#0d0d0d"
+                placeholderTextColor:classA.getColourComponent(4)
                 hoverEnabled: true
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -123,36 +132,34 @@ Page{
                 font.pointSize: 12
                 font.bold: true
                 background: Rectangle {
-                    color: "#d9d9d9"
-                    border.width: 2
-                    border.color: "#161626"
+                    color: "#F5F5F5"
+                    border.width: 1
+                    border.color: "#B0BEC5"
                     radius: 10
                 }
             }
 
             Button {
-                            id: button
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            flat: true
-                            y: 550
-                            width: 150
-                            height: 45
-                            text: qsTr("Login")
-                            display: AbstractButton.TextOnly
-                            background: Rectangle {
-                                color: "#a0a0a0"
-                                border.width: 2
-                                border.color: "#161626"
-                                radius: 10
-                            }
-                            font.family: "Roboto"
-                            font.pointSize: 12
-                            font.bold: true
-                            onClicked: checkLogin()
-                        }
+                id: button
+                anchors.horizontalCenter: parent.horizontalCenter
+                flat: false // set to false to show the button border and background
+                y: 550
+                width: 150
+                height: 45
+                text: qsTr("Login")
+                display: AbstractButton.TextOnly
+                background: Rectangle {
+                    color: classA.getColourComponent(5) // set the button background color to a muted blue-gray
+                    border.width: 2
+                    border.color: classA.getColourComponent(5)
+                    radius: 10
+                }
+                font.family: "Roboto"
+                font.pointSize: 12
+                font.bold: true
+                onClicked: checkLogin()
+            }
         }
     }
-
 }
-
 
