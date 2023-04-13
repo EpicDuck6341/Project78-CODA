@@ -2,6 +2,12 @@ import QtQuick 2.0
 
 Item{
   id: sideBar
+  function logout(){
+      switchPage("Login.qml")
+      classA.logUserAction(classA.getCurrentUser(),"Logged out")
+      classA.setCurrentUser("")
+  }
+
 Row {
     x: 30
     y: 30
@@ -103,7 +109,7 @@ Column {
             height: 60
             MouseArea {
                 anchors.fill: parent
-                onClicked: switchPage("Login.qml")
+                onClicked: logout()
             }
         }
 }

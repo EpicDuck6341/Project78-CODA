@@ -48,6 +48,83 @@ bool SomeClass::getUserLogin(QString username, QString password)
     return false;
 }
 
+std::vector<QString> findCommands(QString rocketName) {
+    std::vector<QString> commands;
+
+    if (rocketName.isEmpty()) {
+        return commands;
+    }
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("mydatabase.db");
+
+    if (!db.open()) {
+        qDebug() << "Error: " << db.lastError().text();
+        return commands;
+    }
+
+    QString query = "SELECT command_name FROM commands WHERE rocket_name LIKE '%" + rocketName + "%';";
+    QSqlQuery qry(query);
+
+    if (qry.lastError().isValid()) {
+        qDebug() << "Error: " << qry.lastError().text();
+        db.close();
+        return commands;
+    }
+
+    while (qry.next()) {
+        QString command = qry.value(0).toString();
+        commands.push_back(command);
+    }
+
+    db.close();
+    return commands;
+}
+
+
+
+
+void SomeClass::logUserAction(QString user, QString userAction)
+{
+    QSqlDatabase sqlitedb = QSqlDatabase::addDatabase("QSQLITE");
+    qDebug() << Database_path;
+    sqlitedb.setDatabaseName(Database_path);
+
+    if (!sqlitedb.open()) {
+        qDebug() << "Error = " << sqlitedb.lastError().text();
+    }
+    else {
+        qDebug() << "Database is opened";
+
+        QString username = user;
+        QString action = userAction;
+        QDateTime timestamp = QDateTime::currentDateTime();
+
+        QString sQuery = "INSERT INTO user_actions (username, action, timestamp) VALUES (:username, :action, :timestamp)";
+
+        QSqlQuery qry;
+        qry.prepare(sQuery);
+
+        qry.bindValue(":username", username);
+        qry.bindValue(":action", action);
+        qry.bindValue(":timestamp", timestamp);
+        qry.exec();
+
+        if (qry.lastError().isValid()) {
+            qDebug() << "Error = " << qry.lastError().text();
+        }
+        else {
+            qDebug() << "Record Inserted";
+        }
+
+        qDebug() << "Closing..";
+        sqlitedb.close();
+    }
+}
+
+
+
+
 
 
 void SomeClass::connectDB(){

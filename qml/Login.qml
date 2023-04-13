@@ -9,7 +9,6 @@ import QtQuick.Controls 2.15
 Page{
 
     function switchPage(pageInput) {
-
         // Laad het object van een page in een variabele
         var pageObject = Qt.createComponent(pageInput)
 
@@ -32,7 +31,9 @@ Page{
 
     function checkLogin(){
         if(classA.getUserLogin(usernameInput.text,passwordInput.text)===true){
-             switchPage("Dashboard.qml")
+            switchPage("Dashboard.qml")
+            classA.setCurrentUser(usernameInput.text)
+            classA.logUserAction(classA.getCurrentUser(),"Logged in")
         }
         else{
         usernameInput.clear()
