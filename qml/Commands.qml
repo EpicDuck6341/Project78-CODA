@@ -6,6 +6,25 @@ import QtQuick.Controls 2.15
 
 
 Page{
+
+    function getRocket(index){
+        if(index===0) {
+            classA.setButtonState(false)
+            classA.findCommands("rocketA")
+            switchPage("Commands.qml")
+        }
+        if(index===1) {
+            classA.setButtonState(false)
+            classA.findCommands("rocketB")
+            switchPage("Commands.qml")
+        }
+        if(index===2) {
+            classA.setButtonState(false)
+            classA.findCommands("rocketC")
+            switchPage("Commands.qml")
+        }
+    }
+
     Rectangle {
     id: page
     width: 1920
@@ -43,8 +62,9 @@ Page{
 
            textRole: "text"
            valueRole: "value"
+           currentIndex: classA.getCurrentIndex()
            // When an item is selected, update the backend.
-           onActivated: console.log(currentIndex)
+           onActivated: classA.setCurrentIndex(currentIndex), getRocket(currentIndex)
 
 
 
@@ -73,7 +93,7 @@ Page{
         y:150
         Text {
             id: text1
-            text: qsTr("Choose Rocket")
+            text: classA.getCommandName(0)
             font.pixelSize: 24
 
             x: -200
@@ -136,7 +156,7 @@ Page{
         y: 300
         Text {
             id: tex2
-            text: qsTr("Choose Rocket")
+            text: classA.getCommandName(1)
             font.pixelSize: 24
 
             x: -200
@@ -199,7 +219,7 @@ Page{
         y: 450
         Text {
             id: text3
-            text: qsTr("Choose Rocket")
+            text:classA.getCommandName(2)
             font.pixelSize: 24
             x: -200
             y:35
@@ -261,7 +281,7 @@ Page{
         y: 600
         Text {
             id: text4
-            text: qsTr("Choose Rocket")
+            text: classA.getCommandName(3)
             font.pixelSize: 24
 
             x: -200
@@ -324,7 +344,7 @@ Page{
         y: 750
         Text {
             id: text5
-            text: qsTr("Choose Rocket")
+            text:classA.getCommandName(4)
             font.pixelSize: 24
 
             x: -200

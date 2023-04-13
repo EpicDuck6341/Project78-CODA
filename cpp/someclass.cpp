@@ -49,9 +49,7 @@ bool SomeClass::getUserLogin(QString username, QString password)
 }
 
 std::vector<QString> SomeClass::findCommands(QString rocketName) {
-    qDebug() << Database_path;
-    std::vector<QString> commands;
-
+    commands.clear();
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(Database_path);
 
@@ -76,6 +74,15 @@ std::vector<QString> SomeClass::findCommands(QString rocketName) {
 
     db.close();
     return commands;
+}
+
+QString SomeClass::getCommandName(int index){
+    if(commands.empty() == true){
+        return "";
+    }
+    QString name = commands[index];
+    qDebug() << name;
+    return name;
 }
 
 

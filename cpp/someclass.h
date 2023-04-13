@@ -14,12 +14,20 @@ public:
     QString currentUser;
     explicit SomeClass(QObject *parent = nullptr);
     QString componentArray[3] = {"#3b3a4a","#161626","White.png"};
+    std::vector<QString> commands;
     bool buttonState = false;  //Delaybutton state for page switching
+    int currentIndex;//Combobox index
 
 
 signals:
 
 public slots:    
+    void setCurrentIndex(int index){
+        currentIndex = index;
+    }
+    int getCurrentIndex(){
+        return currentIndex;
+    }
     void setCurrentUser(QString user){
         currentUser = user;
     }
@@ -32,10 +40,12 @@ public slots:
     bool getButtonState(){
         return buttonState;
     }
+
     void connectDB();
     bool getUserLogin(QString username,QString password);
     void logUserAction(QString user,QString action);
     std::vector<QString> findCommands(QString rocketName);
+    QString getCommandName(int index);
     void setColourComponent(int index, QString value){
         componentArray[index] = value;
     }
