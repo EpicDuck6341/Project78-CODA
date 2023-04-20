@@ -4,12 +4,12 @@ import QtQuick.Window 6.2
 import QtQuick.Controls 2.15
 
 
-Page{
-    Rectangle {
-    id: page2
+Rectangle {
+    id: page
     width: 1920
     height: 1080
     color: classA.getColourComponent(0)
+
     Image {
         id: imageBG
         anchors.horizontalCenter: parent.horizontalCenter
@@ -17,36 +17,43 @@ Page{
         height: 1080
         source: classA.getPath("../assets/background")
     }
+
     Rectangle{
         anchors.centerIn: parent
-        width: 1000
-        height: 800
-        color:classA.getColourComponent(1)
-        border.color: classA.getColourComponent(3)
-        antialiasing: true
+        width: 1200
+        height: 850
+        color: classA.getColourComponent(1)
         radius: 50
-        Rectangle{
-            x:160
-            width:2
-            height:800
-             color: classA.getColourComponent(3)
 
+        Loader {
+            id: sideBar
+            source: "SideBar.qml"
         }
 
-    Loader {
-                id: sideBar
-                source: "SideBar.qml"
+        Row {
+            anchors {
+                top: parent.top
+                horizontalCenter: parent.horizontalCenter
+                margins: 30
             }
 
-    Text {
-        id: loginText
-        x:500
-        text: qsTr("Logs")
-        font.pixelSize: 48
-        horizontalAlignment: Text.AlignHCenter
-         color :classA.getColourComponent(4)
+            Image {
+                source:  classA.getPath("../assets/logs")
+                width: 40
+                height: 40
+                opacity: 0.8
+            }
+
+            Text {
+                text: "Logs"
+                font.family: "Montserrat"
+                font.pixelSize: 32
+                color: classA.getColourComponent(4)
+            }
+        }
+
+
     }
 }
-}
-}
+
 

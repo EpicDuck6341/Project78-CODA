@@ -7,6 +7,16 @@ Item{
       classA.logUserAction(classA.getCurrentUser(),"Logged out")
       classA.setCurrentUser("")
   }
+ Rectangle{
+
+      width:150
+      height: 850
+      color: classA.getColourComponent(6)
+      border.color: classA.getColourComponent(4)
+      border.width:  1
+      antialiasing: true
+      radius: 50
+
 
 Row {
     x: 30
@@ -21,7 +31,7 @@ Row {
 Column {
     x: 45
     y: 145
-    spacing: 40
+    spacing: 60
     Row {
         Image {
             source:classA.getPath("../assets/dashboard")
@@ -76,21 +86,6 @@ Column {
     }
     Row {
         Image {
-            source: classA.getPath("../assets/user")
-            width: 45
-            height: 45
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    switchPage("User.qml")
-                }
-            }
-        }
-
-
-    }
-    Row {
-        Image {
             source: classA.getPath("../assets/settings")
             width: 45
             height: 45
@@ -115,3 +110,5 @@ Column {
 }
 }
 }
+}
+

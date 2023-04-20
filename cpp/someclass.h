@@ -13,7 +13,7 @@ class SomeClass : public QObject
 public:
     QString currentUser;
     explicit SomeClass(QObject *parent = nullptr);
-    QString componentArray[6] = {"#FEFEFA","#ECEFF1",".png","#B0BEC5","#3B3B3B","#B0BEC5"};
+    QString componentArray[7] = {"#FEFEFA","#ECEFF1",".png","#B0BEC5","#3B3B3B","#B0BEC5", "#d6d6d6"};
     std::vector<QString> commands;
     bool buttonState[5] = {false,false,false,false,false};  //Delaybutton state for page switching
     int currentIndex;//Combobox index

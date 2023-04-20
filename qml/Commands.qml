@@ -46,8 +46,8 @@ Page{
     }
     Rectangle{
         anchors.centerIn: parent
-        width: 1000
-        height: 800
+        width: 1200
+        height: 850
         color:classA.getColourComponent(1)
         border.color: classA.getColourComponent(3)
         antialiasing: true

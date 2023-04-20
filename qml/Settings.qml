@@ -1,97 +1,100 @@
 import QtQuick 2.0
-import QtQuick 6.2
-import QtQuick.Window 6.2
 import QtQuick.Controls 2.15
 
-
-Page{
-
+Page {
     function switchColour(){
-        //Set Bright
-        if(classA.getColourComponent(0)==="#010105"){
-            classA.setColourComponent(0,"#FEFEFA")
-            classA.setColourComponent(1,"#ECEFF1")
-            classA.setColourComponent(2,".png")
-            classA.setColourComponent(3,"#B0BEC5")
-            classA.setColourComponent(4,"#757575")
-            classA.setColourComponent(5,"#B0BEC5")
+         //Set Bright
+         if(classA.getColourComponent(0)==="#010105"){
+             classA.setColourComponent(0,"#FEFEFA")
+             classA.setColourComponent(1,"#ECEFF1")
+             classA.setColourComponent(2,".png")
+             classA.setColourComponent(3,"#B0BEC5")
+             classA.setColourComponent(4,"#757575")
+             classA.setColourComponent(5,"#B0BEC5")
+             classA.setColourComponent(6,"#d6d6d6")
 
-        }
-        //Set Dark
-        else if(classA.getColourComponent(0)==="#FEFEFA"){
-            classA.setColourComponent(0,"#010105")
-            classA.setColourComponent(1,"#121212")
-            classA.setColourComponent(2,"White.png")
-            classA.setColourComponent(3,"#3b3b3b")
-            classA.setColourComponent(4,"#B0BEC5")
-            classA.setColourComponent(5,"#B0BEC5")
-        }
-        switchPage("Settings.qml")
-    }
+         }
+         //Set Dark
+         else if(classA.getColourComponent(0)==="#FEFEFA"){
+             classA.setColourComponent(0,"#010105")
+             classA.setColourComponent(1,"#242124")
+             classA.setColourComponent(2,"White.png")
+             classA.setColourComponent(3,"#3b3b3b")
+             classA.setColourComponent(4,"#B0BEC5")
+             classA.setColourComponent(5,"#B0BEC5")
+             classA.setColourComponent(6,"#100C08")
+         }
+         switchPage("Settings.qml")
+     }
 
     Rectangle {
-    id: page
-    width: 1920
-    height: 1080
-    color: classA.getColourComponent(0)
-    Image {
-        id: imageBG
-        anchors.horizontalCenter: parent.horizontalCenter
+        id: page
         width: 1920
         height: 1080
-        source: classA.getPath("../assets/background")
-    }
-    Rectangle{
-        anchors.centerIn: parent
-        width: 1000
-        height: 800
-        color:classA.getColourComponent(1)
-        border.color:  classA.getColourComponent(3)
-        antialiasing: true
-        radius: 50
-        Rectangle{
-            x:160
-            width:2
-            height:800
-             color: classA.getColourComponent(3)
+        color: classA.getColourComponent(0)
 
+        Image {
+            id: imageBG
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 1920
+            height: 1080
+            source: classA.getPath("../assets/background")
         }
 
-    Loader {
+        Rectangle{
+            anchors.centerIn: parent
+            width: 1200
+            height: 850
+            color: classA.getColourComponent(1)
+            radius: 50
+
+            Loader {
                 id: sideBar
                 source: "SideBar.qml"
             }
 
-    Text {
-        id: loginText
-        x:500
-        text: "Settings"
-        font.pixelSize: 48
-        horizontalAlignment: Text.AlignHCenter
-        color: classA.getColourComponent(4)
-    }
-        Button {
-                        id: button
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        flat: true
-                        y: 550
-                        width: 150
-                        height: 45
-                        text: qsTr("Login")
-                        display: AbstractButton.TextOnly
-                        background: Rectangle {
-                            color: "#a0a0a0"
-                            border.width: 2
-                            border.color: "#161626"
-                            radius: 10
-                        }
-                        font.family: "Roboto"
-                        font.pointSize: 12
-                        font.bold: true
-                        onClicked:switchColour()
-                    }
+            Row {
+                anchors {
+                    top: parent.top
+                    horizontalCenter: parent.horizontalCenter
+                    margins: 30
+                }
+
+                Image {
+                    source:  classA.getPath("../assets/settings")
+                    width: 40
+                    height: 40
+                    opacity: 0.8
+                }
+
+                Text {
+                    text: "Settings"
+                    font.family: "Montserrat"
+                    font.pixelSize: 32
+                    color: classA.getColourComponent(4)
+                }
+            }
+
+            Button {
+                id: button
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.bottom
+                    margins: 30
+                }
+                flat: true
+                width: 200
+                height: 60
+                text: qsTr("Login")
+                font.family: "Open Sans"
+                font.pixelSize: 18
+                font.bold: true
+                background: Rectangle {
+                    color: "#0072c6"
+                    radius: 30
+                }
+                onClicked: switchColour()
+            }
+        }
     }
 }
-}
-
-
