@@ -38,7 +38,7 @@ Rectangle {
             }
 
             Image {
-                source:  classA.getPath("../assets/graphs")
+                source:  classA.getPath("../assets/graph")
                 width: 40
                 height: 40
                 opacity: 0.8

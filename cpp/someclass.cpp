@@ -58,7 +58,7 @@ std::vector<QString> SomeClass::findCommands(QString rocketName) {
         return commands;
     }
 
-    QString query = "SELECT command_name FROM commands WHERE rocket_name LIKE '%" + rocketName + "%';";
+    QString query = "SELECT command_name FROM commands WHERE launch_type LIKE '%" + rocketName + "%';";
     QSqlQuery qry(query);
 
     if (qry.lastError().isValid()) {
@@ -78,7 +78,7 @@ std::vector<QString> SomeClass::findCommands(QString rocketName) {
 
 QString SomeClass::getCommandName(int index){
     if(commands.empty() == true){
-        return "";
+        return "error";
     }
     QString name = commands[index];
     return name;
