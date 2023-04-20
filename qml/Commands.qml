@@ -89,6 +89,7 @@ Rectangle {
                                     classA.setButtonState(false,index)
                                     progressBar.value = progressBar.value -(1.0/classA.commandVecSize())
                                     classA.setBarLevel(progressBar.value)
+                                    errorMessage.text = ""
                                 }
                                 if(classA.getButtonState(index+1)===true){
                                     errorMessage.text =  "Command " + (index+2) + " already in progress"
@@ -98,6 +99,7 @@ Rectangle {
                                 classA.setButtonState(false,index)
                                 progressBar.value = progressBar.value -(1.0/classA.commandVecSize())
                                 classA.setBarLevel(progressBar.value)
+                                errorMessage.text = ""
                                 }
                             }
                         }
