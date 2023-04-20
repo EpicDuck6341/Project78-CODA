@@ -20,6 +20,7 @@ Page{
 
             // Als het object succesvol is gemaakt, ga naar de tweede pagina
             if (page !== null) {
+                stackView.clear()
                 stackView.push(page)
             } else {
                 console.log("Error creating object from component")

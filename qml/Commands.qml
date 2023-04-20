@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick 6.2
 import QtQuick.Window 6.2
 import QtQuick.Controls 2.0
+import QtQuick.Controls 2.15
 
 
 Rectangle {
@@ -11,25 +12,18 @@ Rectangle {
     color: classA.getColourComponent(0)
 
     function searchLaunchType(){
-
-
-        if(launchType.text===""){
-            return
-        }
-        else{
         classA.findCommands(launchType.text)
-        console.log(classA.getCommandName(0))
+        classA.findCommandData(launchType.text)
         if(classA.getCommandName(0)!=="error"){
-            console.log("hoi")
+            buttonLoader.active = true
+            classA.setLoaderState(true)
         }
         else{
-            console.log("doei")
-        }
+             buttonLoader.active = false
+            classA.setLoaderState(false)
+
         }
     }
-
-
-
 
     Image {
         id: imageBG
@@ -53,19 +47,62 @@ Rectangle {
 
         Loader {
             id: buttonLoader
-            active: false
+            active: classA.getLoaderState()
             sourceComponent: Grid {
+                id:gridLoader
                 x: 180
-                y: 90
+                y: 225
                 rows: 8
-                spacing: 35
+                columnSpacing: 50
+                rowSpacing: 35
 
                 Repeater {
-                    model: 30
+                    id:repeater
+                    model: classA.commandVecSize()
                     Switch {
                         id: control
+                        checked: classA.getButtonState(index)
+                        onToggled: {
+                            if (control.checked) {
+                                if(index!==0){
+                                    if(classA.getButtonState(index-1)===true){
+                                        classA.getCommandData(index);
+                                        progressBar.value = progressBar.value +(1.0/classA.commandVecSize())
+                                        classA.setBarLevel(progressBar.value)
+                                        classA.setButtonState(true,index)
+                                        errorMessage.text = ""
+                                    }
+                                    else{
+                                        errorMessage.text =  "Command " + index+ " not done"
+                                        control.checked = false
+                                    }
+                                }
+                                else{
+                                    errorMessage.text = ""
+                                    classA.setButtonState(true,index)
+                                    classA.getCommandData(index)
+                                    progressBar.value = progressBar.value +(1.0/classA.commandVecSize())
+                                    classA.setBarLevel(progressBar.value)
+                                }
+                            } else {
+                                if(classA.commandVecSize() === index-1){
+                                    classA.setButtonState(false,index)
+                                    progressBar.value = progressBar.value -(1.0/classA.commandVecSize())
+                                    classA.setBarLevel(progressBar.value)
+                                }
+                                if(classA.getButtonState(index+1)===true){
+                                    errorMessage.text =  "Command " + (index+2) + " already in progress"
+                                    control.checked = true
+                                }
+                                else{
+                                classA.setButtonState(false,index)
+                                progressBar.value = progressBar.value -(1.0/classA.commandVecSize())
+                                classA.setBarLevel(progressBar.value)
+                                }
+                            }
+                        }
                         Text {
-                            text: "Commands"
+                            text: (index+1)+"."+" "+classA.getCommandName(index)
                             font.family: "Montserrat"
                             font.pixelSize: 12
                             color: classA.getColourComponent(4)
@@ -83,6 +120,7 @@ Rectangle {
                             border.color: "black"
 
                             Rectangle {
+                                id: slideBall
                                 x: control.checked ? parent.width - width : 0
                                 width: 30
                                 height: 30
@@ -95,6 +133,35 @@ Rectangle {
             }
         }
 
+        Text {
+            id: errorMessage
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: 160
+            color: "#FF0000"
+            font.pixelSize: 18
+        }
+
+
+
+
+        ProgressBar {
+            x:750
+            anchors.verticalCenter: parent.verticalCenter
+            id: progressBar
+            value: classA.getBarLevel()
+            width: 700
+            height: 30
+            transform: Rotation {
+                   angle: -90
+                   origin {
+                       x: progressBar.width / 2
+                       y: progressBar.height / 2
+                   }
+               }
+        }
+
+
+
 
 
 
@@ -103,7 +170,7 @@ Rectangle {
 TextField {
     id: launchType
     anchors.horizontalCenter: parent.horizontalCenter
-    y: 340
+    y: 80
     width: 210
     height: 45
     opacity: 1
@@ -127,9 +194,9 @@ Button {
     id: searchButton
     anchors.horizontalCenter: parent.horizontalCenter
     flat: false // set to false to show the button border and background
-    y: 420
+    y: 130
     width: 150
-    height: 45
+    height: 30
     text: qsTr("Search")
     display: AbstractButton.TextOnly
     background: Rectangle {

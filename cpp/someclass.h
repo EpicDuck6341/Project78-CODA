@@ -15,19 +15,16 @@ public:
     explicit SomeClass(QObject *parent = nullptr);
     QString componentArray[7] = {"#FEFEFA","#ECEFF1",".png","#B0BEC5","#3B3B3B","#B0BEC5", "#d6d6d6"};
     std::vector<QString> commands;
-    bool buttonState[5] = {false,false,false,false,false};  //Delaybutton state for page switching
-    int currentIndex;//Combobox index
+    std::vector<QString> commandData;
+    std::vector<bool> buttonState;
+    bool loaderState =  false; //buttonLoader state on Command Page
+    QString barLevel = 0;
+
 
 
 signals:
 
 public slots:    
-    void setCurrentIndex(int index){
-        currentIndex = index;
-    }
-    int getCurrentIndex(){
-        return currentIndex;
-    }
     void setCurrentUser(QString user){
         currentUser = user;
     }
@@ -41,11 +38,37 @@ public slots:
         return buttonState[index];
     }
 
+    int commandVecSize(){
+        int size = commands.size();
+        return size;
+    }
+
+    void setLoaderState(bool state){
+        loaderState = state;
+    }
+
+    bool getLoaderState(){
+        return loaderState;
+    }
+
+    void setBarLevel(QString level){
+        barLevel = level;
+    }
+
+    QString getBarLevel(){
+        return barLevel;
+    }
+
+
+
+
     void connectDB();
     bool getUserLogin(QString username,QString password);
     void logUserAction(QString user,QString action);
     std::vector<QString> findCommands(QString rocketName);
+    std::vector<QString> findCommandData(QString rocketName);
     QString getCommandName(int index);
+    QString getCommandData(int index);
     void setColourComponent(int index, QString value){
         componentArray[index] = value;
     }

@@ -12,7 +12,7 @@ ApplicationWindow {
       id: stackView
     Loader {
                 id: pageLoader1
-                source: "Commands.qml"
+                source: "Login.qml"
             }
   }
 }

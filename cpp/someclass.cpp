@@ -50,21 +50,26 @@ bool SomeClass::getUserLogin(QString username, QString password)
 
 std::vector<QString> SomeClass::findCommands(QString rocketName) {
     commands.clear();
+    buttonState.clear();
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(Database_path);
 
     if (!db.open()) {
         qDebug() << "Error: " << db.lastError().text();
-        return commands;
+       commands.clear();
+       return {};
     }
 
-    QString query = "SELECT command_name FROM commands WHERE launch_type LIKE '%" + rocketName + "%';";
+    QString query = "SELECT command_name FROM commands WHERE launch_type = '" + rocketName + "';";
+
+
     QSqlQuery qry(query);
 
     if (qry.lastError().isValid()) {
         qDebug() << "Error: " << qry.lastError().text();
         db.close();
-        return commands;
+        commands.clear();
+        return {};
     }
 
     while (qry.next()) {
@@ -72,8 +77,44 @@ std::vector<QString> SomeClass::findCommands(QString rocketName) {
         commands.push_back(command);
     }
 
+    for(unsigned long long i = 0; i<commands.size();i++){
+        buttonState.push_back(false);
+    }
+
     db.close();
     return commands;
+}
+
+std::vector<QString> SomeClass::findCommandData(QString rocketName) {
+    commandData.clear();
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(Database_path);
+
+    if (!db.open()) {
+        qDebug() << "Error: " << db.lastError().text();
+       commandData.clear();
+       return {};
+    }
+
+    QString query = "SELECT command FROM commands WHERE launch_type = '" + rocketName + "';";
+
+
+    QSqlQuery qry(query);
+
+    if (qry.lastError().isValid()) {
+        qDebug() << "Error: " << qry.lastError().text();
+        db.close();
+        commandData.clear();
+        return {};
+    }
+
+    while (qry.next()) {
+        QString command = qry.value(0).toString();
+        commandData.push_back(command);
+    }
+
+    db.close();
+    return commandData;
 }
 
 QString SomeClass::getCommandName(int index){
@@ -83,6 +124,13 @@ QString SomeClass::getCommandName(int index){
     QString name = commands[index];
     return name;
 }
+
+QString SomeClass::getCommandData(int index){
+    QString data = commandData[index];
+    qDebug() << data;
+    return data;
+}
+
 
 
 
