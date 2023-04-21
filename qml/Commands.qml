@@ -71,6 +71,7 @@ Rectangle {
                                         classA.setBarLevel(progressBar.value)
                                         classA.setButtonState(true,index)
                                         errorMessage.text = ""
+                                        classA.logUserAction(classA.getCurrentUser(),"Activated Command: "+(index+1)+"."+" "+classA.getCommandName(index))
                                     }
                                     else{
                                         errorMessage.text =  "Command " + index+ " not done"
@@ -83,6 +84,7 @@ Rectangle {
                                     classA.getCommandData(index)
                                     progressBar.value = progressBar.value +(1.0/classA.commandVecSize())
                                     classA.setBarLevel(progressBar.value)
+                                    classA.logUserAction(classA.getCurrentUser(),"Activated Command: "+(index+1)+"."+" "+classA.getCommandName(index))
                                 }
                             } else {
                                 if(classA.commandVecSize() === index-1){
@@ -90,6 +92,7 @@ Rectangle {
                                     progressBar.value = progressBar.value -(1.0/classA.commandVecSize())
                                     classA.setBarLevel(progressBar.value)
                                     errorMessage.text = ""
+                                    classA.logUserAction(classA.getCurrentUser(),"Deactivated Command: "+(index+1)+"."+" "+classA.getCommandName(index))
                                 }
                                 if(classA.getButtonState(index+1)===true){
                                     errorMessage.text =  "Command " + (index+2) + " already in progress"
@@ -100,6 +103,7 @@ Rectangle {
                                 progressBar.value = progressBar.value -(1.0/classA.commandVecSize())
                                 classA.setBarLevel(progressBar.value)
                                 errorMessage.text = ""
+                                classA.logUserAction(classA.getCurrentUser(),"Deactivated Command: "+(index+1)+"."+" "+classA.getCommandName(index))
                                 }
                             }
                         }

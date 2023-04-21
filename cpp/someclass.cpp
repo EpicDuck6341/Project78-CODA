@@ -131,6 +131,44 @@ QString SomeClass::getCommandData(int index){
     return data;
 }
 
+std::vector<std::vector<QString>> SomeClass::findUserAction(QString username) {
+    userActions.clear();
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(Database_path);
+
+    if (!db.open()) {
+        qDebug() << "Error: " << db.lastError().text();
+        return userActions;
+    }
+
+    QString query = "SELECT id, username, action, timestamp FROM user_actions WHERE username = '" + username + "' ORDER BY timestamp DESC LIMIT 30;";
+
+    QSqlQuery qry(query);
+
+    if (qry.lastError().isValid()) {
+        qDebug() << "Error: " << qry.lastError().text();
+        db.close();
+        return userActions;
+    }
+
+    while (qry.next()) {
+        std::vector<QString> row;
+        QString id = qry.value(0).toString();
+        QString username = qry.value(1).toString();
+        QString action = qry.value(2).toString();
+        QString timestamp = qry.value(3).toString();
+        row.push_back(id);
+        row.push_back(username);
+        row.push_back(action);
+        row.push_back(timestamp);
+        userActions.push_back(row);
+    }
+
+    db.close();
+    return userActions;
+}
+
+
 
 
 

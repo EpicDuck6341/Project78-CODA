@@ -18,7 +18,10 @@ public:
     std::vector<QString> commandData;
     std::vector<bool> buttonState;
     bool loaderState =  false; //buttonLoader state on Command Page
-    QString barLevel = 0;
+    bool actionLoaderSate = false;
+    double barLevel = 0;
+    std::vector<std::vector<QString>> userActions;
+
 
 
 
@@ -43,6 +46,17 @@ public slots:
         return size;
     }
 
+    int userActionSize(){
+        int size = userActions.size();
+        return size;
+    }
+
+    QString getUserAction(int x, int y){
+        QString var = userActions[x][y];
+        return var;
+    }
+
+
     void setLoaderState(bool state){
         loaderState = state;
     }
@@ -51,13 +65,23 @@ public slots:
         return loaderState;
     }
 
-    void setBarLevel(QString level){
+    void setActionLoaderState(bool state){
+        actionLoaderSate = state;
+    }
+
+    bool getActionLoaderState(){
+        return actionLoaderSate;
+    }
+
+    void setBarLevel(double level){
         barLevel = level;
     }
 
-    QString getBarLevel(){
+    double getBarLevel(){
         return barLevel;
     }
+
+    std::vector<std::vector<QString>> findUserAction(QString username);
 
 
 
