@@ -11,9 +11,38 @@ Rectangle {
     height: 1080
     color: classA.getColourComponent(0)
 
+    function lockCommands(){
+        console.log(classA.getButtonLock())
+        errorMessage.text = ""
+        if(classA.getLoaderState()===true){
+            if(classA.getButtonLock() === true && classA.getButtonState(0)===false){
+                classA.setButtonLock(false)
+                lock.text = "Unlocked"
+                searchButton.visible = true
+                launchType.visible = true
+            }
+            else if(classA.getButtonLock() === true && classA.getButtonState(0)===true){
+                errorMessage.text = "Buttons still switched on"
+            }
+
+            else{
+
+            classA.setButtonLock(true)
+            lock.text = "Locked"
+            searchButton.visible = false
+            launchType.visible = false
+            }
+        }
+        else{
+            errorMessage.text = "No commands to lock in"
+        }
+
+    }
+
     function searchLaunchType(){
         classA.findCommands(launchType.text)
-        classA.findCommandData(launchType.text)
+        classA.findCommandData(launchType.text)     
+
         if(classA.getCommandName(0)!=="error"){
             buttonLoader.active = true
             classA.setLoaderState(true)
@@ -21,9 +50,9 @@ Rectangle {
         else{
              buttonLoader.active = false
             classA.setLoaderState(false)
-
+            errorMessage.text = "Rocket not found"
+            }
         }
-    }
 
     Image {
         id: imageBG
@@ -63,6 +92,7 @@ Rectangle {
                         id: control
                         checked: classA.getButtonState(index)
                         onToggled: {
+                        if(classA.getButtonLock()===true){
                             if (control.checked) {
                                 if(index!==0){
                                     if(classA.getButtonState(index-1)===true){
@@ -107,6 +137,11 @@ Rectangle {
                                 }
                             }
                         }
+                        else{
+                            control.checked = false
+                            errorMessage.text = "Commands not locked in yet"
+                        }
+                    }
                         Text {
                             text: (index+1)+"."+" "+classA.getCommandName(index)
                             font.family: "Montserrat"
@@ -196,6 +231,7 @@ TextField {
     }
 }
 
+
 Button {
     id: searchButton
     anchors.horizontalCenter: parent.horizontalCenter
@@ -215,6 +251,32 @@ Button {
     font.pointSize: 12
     font.bold: true
     onClicked: searchLaunchType()
+}
+
+Button {
+    id: lockCommandsButton
+    flat: false // set to false to show the button border and background
+    y: 77
+    x: 220
+    width: 200
+    height: 50
+    text: qsTr("Lock in commands")
+    display: AbstractButton.TextOnly
+    background: Rectangle {
+        color: classA.getColourComponent(5) // set the button background color to a muted blue-gray
+        border.width: 2
+        border.color: classA.getColourComponent(5)
+        radius: 10
+    }
+    font.family: "Roboto"
+    font.pointSize: 12
+    font.bold: true
+    onClicked: lockCommands()
+    Text{
+        id: lock
+        anchors.horizontalCenter: parent.horizontalCenter
+        y:-30
+    }
 }
 
 

@@ -19,6 +19,7 @@ public:
     std::vector<bool> buttonState;
     bool loaderState =  false; //buttonLoader state on Command Page
     bool actionLoaderSate = false;
+    bool buttonLock = false;
     double barLevel = 0;
     std::vector<std::vector<QString>> userActions;
 
@@ -27,7 +28,14 @@ public:
 
 signals:
 
-public slots:    
+public slots:
+
+    void setButtonLock(bool state){
+        buttonLock = state;
+    }
+    bool getButtonLock(){
+        return buttonLock;
+    }
     void setCurrentUser(QString user){
         currentUser = user;
     }
