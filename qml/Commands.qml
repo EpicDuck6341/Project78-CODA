@@ -11,6 +11,18 @@ Rectangle {
     height: 1080
     color: classA.getColourComponent(0)
 
+    function lockSequence(){
+        if(classA.getButtonSequence()===true){
+            classA.setButtonSequence(false)
+            seq.text = "Button Sequence unlocked"
+        }
+        else{
+            classA.setButtonSequence(true)
+            seq.text = "Button Sequence locked"
+
+        }
+    }
+
     function lockCommands(){
         console.log(classA.getButtonLock())
         errorMessage.text = ""
@@ -92,6 +104,7 @@ Rectangle {
                         id: control
                         checked: classA.getButtonState(index)
                         onToggled: {
+                        if(classA.getButtonSequence()===true){
                         if(classA.getButtonLock()===true){
                             if (control.checked) {
                                 if(index!==0){
@@ -136,6 +149,7 @@ Rectangle {
                                 classA.logUserAction(classA.getCurrentUser(),"Deactivated Command: "+(index+1)+"."+" "+classA.getCommandName(index))
                                 }
                             }
+                        }
                         }
                         else{
                             control.checked = false
@@ -274,6 +288,32 @@ Button {
     onClicked: lockCommands()
     Text{
         id: lock
+        anchors.horizontalCenter: parent.horizontalCenter
+        y:-30
+    }
+}
+
+Button {
+    id: lockButtonSequence
+    flat: false // set to false to show the button border and background
+    y: 77
+    x: 750
+    width: 250
+    height: 50
+    text: qsTr("Change Button Sequence")
+    display: AbstractButton.TextOnly
+    background: Rectangle {
+        color: classA.getColourComponent(5) // set the button background color to a muted blue-gray
+        border.width: 2
+        border.color: classA.getColourComponent(5)
+        radius: 10
+    }
+    font.family: "Roboto"
+    font.pointSize: 12
+    font.bold: true
+    onClicked: lockSequence()
+    Text{
+        id: seq
         anchors.horizontalCenter: parent.horizontalCenter
         y:-30
     }
