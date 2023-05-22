@@ -107,6 +107,8 @@ public slots:
     void connectDB();
     bool getUserLogin(QString username,QString password);
     void logUserAction(QString user,QString action);
+    void addNewUser(QString newUser,QString newPassword);
+    void addNewRocket(QString rocketName, QString commandName, QString commandData);
     std::vector<QString> findCommands(QString rocketName);
     std::vector<QString> findCommandData(QString rocketName);
     QString getCommandName(int index);

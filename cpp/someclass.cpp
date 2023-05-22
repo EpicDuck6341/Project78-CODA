@@ -212,6 +212,81 @@ void SomeClass::logUserAction(QString user, QString userAction)
 }
 
 
+void SomeClass::addNewUser(QString newUser, QString newPassword)
+{
+    QSqlDatabase sqlitedb = QSqlDatabase::addDatabase("QSQLITE");
+    qDebug() << Database_path;
+    sqlitedb.setDatabaseName(Database_path);
+
+    if (!sqlitedb.open()) {
+        qDebug() << "Error = " << sqlitedb.lastError().text();
+    }
+    else {
+        qDebug() << "Database is opened";
+
+        QString username = newUser;
+        QString password = newPassword;
+
+        QString sQuery = "INSERT INTO users (username, password) VALUES (:username, :password)";
+
+        QSqlQuery qry;
+        qry.prepare(sQuery);
+
+        qry.bindValue(":username", username);
+        qry.bindValue(":password", password);
+        qry.exec();
+
+        if (qry.lastError().isValid()) {
+            qDebug() << "Error = " << qry.lastError().text();
+        }
+        else {
+            qDebug() << "Record Inserted";
+        }
+
+        qDebug() << "Closing..";
+        sqlitedb.close();
+    }
+}
+
+void SomeClass::addNewRocket(QString rocketName, QString commandName, QString commandData)
+{
+    QSqlDatabase sqlitedb = QSqlDatabase::addDatabase("QSQLITE");
+    qDebug() << Database_path;
+    sqlitedb.setDatabaseName(Database_path);
+
+    if (!sqlitedb.open()) {
+        qDebug() << "Error = " << sqlitedb.lastError().text();
+    }
+    else {
+        qDebug() << "Database is opened";
+
+        QString rocketN = rocketName;
+        QString commandN = commandName;
+        QString commandD = commandData;
+
+        QString sQuery = "INSERT INTO commands (launch_type,command_name,command) VALUES (:launch_type, :command_name,:command)";
+
+        QSqlQuery qry;
+        qry.prepare(sQuery);
+
+        qry.bindValue(":launch_type", rocketN);
+        qry.bindValue(":command_name",commandN);
+        qry.bindValue(":command",commandD);
+        qry.exec();
+
+        if (qry.lastError().isValid()) {
+            qDebug() << "Error = " << qry.lastError().text();
+        }
+        else {
+            qDebug() << "Record Inserted";
+        }
+
+        qDebug() << "Closing..";
+        sqlitedb.close();
+    }
+}
+
+
 
 
 

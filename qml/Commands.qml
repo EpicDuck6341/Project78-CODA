@@ -104,8 +104,8 @@ Rectangle {
                         id: control
                         checked: classA.getButtonState(index)
                         onToggled: {
-                        if(classA.getButtonSequence()===true){
                         if(classA.getButtonLock()===true){
+                        if(classA.getButtonSequence()===true){
                             if (control.checked) {
                                 if(index!==0){
                                     if(classA.getButtonState(index-1)===true){
@@ -114,7 +114,7 @@ Rectangle {
                                         classA.setBarLevel(progressBar.value)
                                         classA.setButtonState(true,index)
                                         errorMessage.text = ""
-                                        classA.logUserAction(classA.getCurrentUser(),"Activated Command: "+(index+1)+"."+" "+classA.getCommandName(index))
+                                        classA.logUserAction(classA.getCurrentUser(),"Activated Command: "+(index+1)+"."+" "+classA.getCommandName(index))                                        
                                     }
                                     else{
                                         errorMessage.text =  "Command " + index+ " not done"
@@ -149,6 +149,9 @@ Rectangle {
                                 classA.logUserAction(classA.getCurrentUser(),"Deactivated Command: "+(index+1)+"."+" "+classA.getCommandName(index))
                                 }
                             }
+                        }
+                        else{
+                            classA.setButtonState(true,index)
                         }
                         }
                         else{
