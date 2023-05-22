@@ -73,19 +73,17 @@ Page {
                     font.pixelSize: 32
                     color: classA.getColourComponent(4)
                 }
+
             }
 
             Button {
                 id: button
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: parent.bottom
-                    margins: 30
-                }
+                anchors.horizontalCenter: parent.horizontalCenter
+                y:250
                 flat: true
                 width: 200
                 height: 60
-                text: qsTr("Login")
+                text: qsTr("Switch lighting mode")
                 font.family: "Open Sans"
                 font.pixelSize: 18
                 font.bold: true
