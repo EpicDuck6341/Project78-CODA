@@ -26,7 +26,6 @@ Rectangle {
             errorText.text = "One or more fields empty"
         }
         classA.addNewRocket(addRocketName.text,addCommandName.text,addCommandData.text)
-        addRocketName.clear()
         addCommandName.clear()
         addCommandData.clear()
         errorText.text = "Rocket inserted"
