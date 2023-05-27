@@ -30,8 +30,8 @@ Rectangle {
             if(classA.getButtonLock() === true && classA.getButtonState(0)===false){
                 classA.setButtonLock(false)
                 lock.text = "Unlocked"
-                searchButton.visible = classA.setSearchBarVisible(true)
-                launchType.visible = classA.setSearchBarVisible(true)
+                classA.setSearchBarVisible(true)
+                classA.setSearchBarVisible(true)
                 switchPage("Commands.qml")
             }
             else if(classA.getButtonLock() === true && classA.getButtonState(0)===true){
@@ -42,8 +42,8 @@ Rectangle {
 
             classA.setButtonLock(true)
             lock.text = "Locked"
-            searchButton.visible = classA.setSearchBarVisible(false)
-            launchType.visible = classA.setSearchBarVisible(false)
+            classA.setSearchBarVisible(false)
+            classA.setSearchBarVisible(false)
             switchPage("Commands.qml")
             }
         }
@@ -60,6 +60,8 @@ Rectangle {
         if(classA.getCommandName(0)!=="error"){
             buttonLoader.active = true
             classA.setLoaderState(true)
+            progressBar.value = 0
+            switchPage("Commands.qml")
         }
         else{
              buttonLoader.active = false
