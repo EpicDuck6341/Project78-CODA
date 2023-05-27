@@ -29,7 +29,7 @@ Rectangle {
         addCommandName.clear()
         addCommandData.clear()
         errorText.text = "Rocket inserted"
-         classA.logUserAction(classA.getCurrentUser(),"Added new rocket")
+        classA.logUserAction(classA.getCurrentUser(),"Added new rocket")
     }
 
     Image {

@@ -23,6 +23,7 @@ public:
     bool buttonSequence = true;
     double barLevel = 0;
     std::vector<std::vector<QString>> userActions;
+    bool searchBarVisible = true;
 
 
 
@@ -30,6 +31,13 @@ public:
 signals:
 
 public slots:
+
+    void setSearchBarVisible(bool var){
+        searchBarVisible = var;
+    }
+    bool getSearchBarVisible(){
+        return searchBarVisible;
+    }
 
     void setButtonLock(bool state){
         buttonLock = state;

@@ -30,8 +30,9 @@ Rectangle {
             if(classA.getButtonLock() === true && classA.getButtonState(0)===false){
                 classA.setButtonLock(false)
                 lock.text = "Unlocked"
-                searchButton.visible = true
-                launchType.visible = true
+                searchButton.visible = classA.setSearchBarVisible(true)
+                launchType.visible = classA.setSearchBarVisible(true)
+                switchPage("Commands.qml")
             }
             else if(classA.getButtonLock() === true && classA.getButtonState(0)===true){
                 errorMessage.text = "Buttons still switched on"
@@ -41,8 +42,9 @@ Rectangle {
 
             classA.setButtonLock(true)
             lock.text = "Locked"
-            searchButton.visible = false
-            launchType.visible = false
+            searchButton.visible = classA.setSearchBarVisible(false)
+            launchType.visible = classA.setSearchBarVisible(false)
+            switchPage("Commands.qml")
             }
         }
         else{
@@ -151,7 +153,14 @@ Rectangle {
                             }
                         }
                         else{
+                            if(classA.getButtonState(index)===false){
                             classA.setButtonState(true,index)
+                            progressBar.value = progressBar.value +(1.0/classA.commandVecSize())
+                            }
+                            else{
+                                classA.setButtonState(false,index)
+                                progressBar.value = progressBar.value -(1.0/classA.commandVecSize())
+                            }
                         }
                         }
                         else{
@@ -240,6 +249,7 @@ TextField {
     font.family: "Roboto"
     font.pointSize: 12
     font.bold: true
+    visible: classA.getSearchBarVisible()
     background: Rectangle {
         color: "#F5F5F5"
         border.width: 1
@@ -268,6 +278,7 @@ Button {
     font.pointSize: 12
     font.bold: true
     onClicked: searchLaunchType()
+    visible: classA.getSearchBarVisible()
 }
 
 Button {
