@@ -141,7 +141,7 @@ std::vector<std::vector<QString>> SomeClass::findUserAction(QString username) {
         return userActions;
     }
 
-    QString query = "SELECT id, username, action, timestamp FROM user_actions WHERE username = '" + username + "' ORDER BY timestamp DESC LIMIT 30;";
+    QString query = "SELECT id, username, action, timestamp FROM user_actions WHERE username = '" + username + "' ORDER BY timestamp DESC;";
 
     QSqlQuery qry(query);
 

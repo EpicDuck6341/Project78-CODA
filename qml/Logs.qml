@@ -13,6 +13,7 @@ Rectangle {
     function searchUserAction(){
         if(searchUser.text!==""){
         classA.findUserAction(searchUser.text)
+        console.log(classA.userActionSize())
 
         if(classA.getUserAction(0,0)!==""){
             userActionLoader.active = true
@@ -48,9 +49,10 @@ Rectangle {
 
          Rectangle{
             y:175
-            x:175
-             width:1000
-             height: 600
+
+             anchors.horizontalCenter: parent.horizontalCenter
+             width:500
+             height: 550
              color: classA.getColourComponent(6)
              border.color: classA.getColourComponent(4)
              border.width:  1
@@ -58,57 +60,63 @@ Rectangle {
              radius: 50
          }
 
-        Item{
-            x:200
-            y:225
-            Text { text: "ID"; font.bold: true; y:-20;color:classA.getColourComponent(4)}
-            Text { text: "Username"; font.bold: true;y:-20;x:30;color:classA.getColourComponent(4) }
-            Text { text: "Action"; font.bold: true;y:-20;x:105;color:classA.getColourComponent(4) }
-            Text { text: "Timestamp"; font.bold: true;y:-20;x:180;color:classA.getColourComponent(4) }
-            Text { text: "ID"; font.bold: true; y:-20;x:493;color:classA.getColourComponent(4)}
-            Text { text: "Username"; font.bold: true;y:-20;x:523;color:classA.getColourComponent(4) }
-            Text { text: "Action"; font.bold: true;y:-20;x:597;color:classA.getColourComponent(4) }
-            Text { text: "Timestamp"; font.bold: true;y:-20;x:673;color:classA.getColourComponent(4) }
-        }
+//        Item{
+//            x:400
+//            y:210
+//            Text { text: "ID"; font.bold: true; y:-20;color:classA.getColourComponent(4)}
+//            Text { text: "Username"; font.bold: true;y:-20;x:30;color:classA.getColourComponent(4) }
+//            Text { text: "Action"; font.bold: true;y:-20;x:105;color:classA.getColourComponent(4) }
+//            Text { text: "Timestamp"; font.bold: true;y:-20;x:180;color:classA.getColourComponent(4) }
+//        }
 
 
 
         Loader{
+        anchors.horizontalCenter: parent.horizontalCenter
         id:userActionLoader
          active: classA.getActionLoaderState()
-        sourceComponent:Item{
-            x: 200
-            y: 225
+        sourceComponent:Item {
+                    x: -200
+                    y: 210
 
+                    ScrollView {
+                        width: 400
+                        height: 500
 
+                        Column {
+                            spacing: 10
 
-            Grid{
-                rows: classA.userActionSize() + 1
-                spacing: 10
-                columns: 2
-                columnSpacing: 20
+                            Repeater {
+                                model: classA.userActionSize()
+                                delegate: Grid {
+                                    columns: 4
 
-
-
-                // Use a Repeater to create a row for each entry in the 2D array
-                Repeater {
-                    model: classA.userActionSize()
-                    delegate: Grid{
-                        columns:4
-
-                        Text { text: classA.getUserAction(index,0)+".       " ;color:classA.getColourComponent(4)}
-                        Text { text: classA.getUserAction(index,1)+"        ";color:classA.getColourComponent(4) }
-                        Text { text: classA.getUserAction(index,2)+"   "  ;color:classA.getColourComponent(4)}
-                        Text { text: classA.getUserAction(index,3)+" "  ;color:classA.getColourComponent(4)}
-                        Rectangle{
-                            color:classA.getColourComponent(5)
-                            width:20
-                            height:5
+                                    Text {
+                                        text: classA.getUserAction(index, 0) + ".       "
+                                        color: classA.getColourComponent(4)
+                                    }
+                                    Text {
+                                        text: classA.getUserAction(index, 1) + "        "
+                                        color: classA.getColourComponent(4)
+                                    }
+                                    Text {
+                                        text: classA.getUserAction(index, 2) + "   "
+                                        color: classA.getColourComponent(4)
+                                    }
+                                    Text {
+                                        text: classA.getUserAction(index, 3) + " "
+                                        color: classA.getColourComponent(4)
+                                    }
+                                    Rectangle {
+                                        color: classA.getColourComponent(5)
+                                        width: 20
+                                        height: 5
+                                    }
+                                }
+                            }
                         }
                     }
                 }
-            }
-        }
     }
 
 
@@ -185,7 +193,4 @@ Rectangle {
 
 
     }
-
-
-
 }
