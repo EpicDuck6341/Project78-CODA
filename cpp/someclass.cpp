@@ -2,9 +2,7 @@
 #include <iostream>
 #include <QDebug>
 
-const QDir projectPath = QDir::currentPath();
-const QString Database_path = projectPath.absolutePath() + "/database.db";
-
+const QString Database_path = QDir::currentPath() + "/database.db";
 
 SomeClass::SomeClass(QObject *parent)
     : QObject{parent}
@@ -12,58 +10,62 @@ SomeClass::SomeClass(QObject *parent)
 
 }
 
+QSqlDatabase SomeClass::openDatabase() {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(Database_path);
+
+    if (!db.open()) {
+        qDebug() << "Error: " << db.lastError().text();
+    }
+
+    return db;
+}
+
 bool SomeClass::getUserLogin(QString username, QString password)
 {
-    if(username == "" || password == ""){
+    if (username.isEmpty() || password.isEmpty()) {
         return false;
     }
-    QSqlDatabase sqlitedb = QSqlDatabase::addDatabase("QSQLITE");
-    sqlitedb.setDatabaseName(Database_path);
 
-    if (!sqlitedb.open()) {
-        qDebug() << "Error = " << sqlitedb.lastError().text();
+    QSqlDatabase db = openDatabase();
+    if (!db.isOpen()) {
         return false;
     }
-    QString sQuery = "SELECT * FROM users WHERE username LIKE '%" + username + "%';";
 
-    QSqlQuery qry(sQuery);
+    QString query = "SELECT * FROM users WHERE username LIKE '%" + username + "%';";
+    QSqlQuery qry(query, db);
 
     if (qry.lastError().isValid()) {
         qDebug() << "Error = " << qry.lastError().text();
-        sqlitedb.close();
+        db.close();
         return false;
     }
 
     if (qry.next()) {
         QString usernameDB = qry.value(0).toString();
         QString passwordDB = qry.value(1).toString();
-        if(username == usernameDB && password == passwordDB){
-        sqlitedb.close();
-        return true;
-    }
-       sqlitedb.close();
+        if (username == usernameDB && password == passwordDB) {
+            db.close();
+            return true;
+        }
     }
 
-    sqlitedb.close();
+    db.close();
     return false;
 }
 
 std::vector<QString> SomeClass::findCommands(QString rocketName) {
     commands.clear();
     buttonState.clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(Database_path);
 
-    if (!db.open()) {
-        qDebug() << "Error: " << db.lastError().text();
-       commands.clear();
-       return {};
+    QSqlDatabase db = openDatabase();
+    if (!db.isOpen()) {
+        commands.clear();
+        return {};
     }
 
     QString query = "SELECT command_name FROM commands WHERE launch_type = '" + rocketName + "';";
-
-
-    QSqlQuery qry(query);
+    QSqlQuery qry(query, db);
 
     if (qry.lastError().isValid()) {
         qDebug() << "Error: " << qry.lastError().text();
@@ -77,7 +79,7 @@ std::vector<QString> SomeClass::findCommands(QString rocketName) {
         commands.push_back(command);
     }
 
-    for(unsigned long long i = 0; i<commands.size();i++){
+    for (unsigned long long i = 0; i < commands.size(); i++) {
         buttonState.push_back(false);
     }
 
@@ -87,19 +89,14 @@ std::vector<QString> SomeClass::findCommands(QString rocketName) {
 
 std::vector<QString> SomeClass::findCommandData(QString rocketName) {
     commandData.clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(Database_path);
-
-    if (!db.open()) {
-        qDebug() << "Error: " << db.lastError().text();
-       commandData.clear();
-       return {};
+    QSqlDatabase db = openDatabase();
+    if (!db.isOpen()) {
+        commandData.clear();
+        return {};
     }
 
     QString query = "SELECT command FROM commands WHERE launch_type = '" + rocketName + "';";
-
-
-    QSqlQuery qry(query);
+    QSqlQuery qry(query, db);
 
     if (qry.lastError().isValid()) {
         qDebug() << "Error: " << qry.lastError().text();
@@ -117,15 +114,15 @@ std::vector<QString> SomeClass::findCommandData(QString rocketName) {
     return commandData;
 }
 
-QString SomeClass::getCommandName(int index){
-    if(commands.empty() == true){
+QString SomeClass::getCommandName(int index) {
+    if (commands.empty()) {
         return "error";
     }
     QString name = commands[index];
     return name;
 }
 
-QString SomeClass::getCommandData(int index){
+QString SomeClass::getCommandData(int index) {
     QString data = commandData[index];
     qDebug() << data;
     return data;
@@ -133,17 +130,13 @@ QString SomeClass::getCommandData(int index){
 
 std::vector<std::vector<QString>> SomeClass::findUserAction(QString username) {
     userActions.clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(Database_path);
-
-    if (!db.open()) {
-        qDebug() << "Error: " << db.lastError().text();
+    QSqlDatabase db = openDatabase();
+    if (!db.isOpen()) {
         return userActions;
     }
 
     QString query = "SELECT id, username, action, timestamp FROM user_actions WHERE username = '" + username + "' ORDER BY timestamp DESC;";
-
-    QSqlQuery qry(query);
+    QSqlQuery qry(query, db);
 
     if (qry.lastError().isValid()) {
         qDebug() << "Error: " << qry.lastError().text();
@@ -168,182 +161,86 @@ std::vector<std::vector<QString>> SomeClass::findUserAction(QString username) {
     return userActions;
 }
 
-
-
-
-
-
-void SomeClass::logUserAction(QString user, QString userAction)
-{
-    QSqlDatabase sqlitedb = QSqlDatabase::addDatabase("QSQLITE");
-    qDebug() << Database_path;
-    sqlitedb.setDatabaseName(Database_path);
-
-    if (!sqlitedb.open()) {
-        qDebug() << "Error = " << sqlitedb.lastError().text();
+void SomeClass::logUserAction(QString user, QString userAction) {
+    QSqlDatabase db = openDatabase();
+    if (!db.isOpen()) {
+        return;
     }
-    else {
-        qDebug() << "Database is opened";
 
-        QString username = user;
-        QString action = userAction;
-        QDateTime timestamp = QDateTime::currentDateTime();
+    QString username = user;
+    QString action = userAction;
+    QDateTime timestamp = QDateTime::currentDateTime();
 
-        QString sQuery = "INSERT INTO user_actions (username, action, timestamp) VALUES (:username, :action, :timestamp)";
+    QString sQuery = "INSERT INTO user_actions (username, action, timestamp) VALUES (:username, :action, :timestamp)";
 
-        QSqlQuery qry;
-        qry.prepare(sQuery);
+    QSqlQuery qry(db);
+    qry.prepare(sQuery);
+    qry.bindValue(":username", username);
+    qry.bindValue(":action", action);
+    qry.bindValue(":timestamp", timestamp);
+    qry.exec();
 
-        qry.bindValue(":username", username);
-        qry.bindValue(":action", action);
-        qry.bindValue(":timestamp", timestamp);
-        qry.exec();
-
-        if (qry.lastError().isValid()) {
-            qDebug() << "Error = " << qry.lastError().text();
-        }
-        else {
-            qDebug() << "Record Inserted";
-        }
-
-        qDebug() << "Closing..";
-        sqlitedb.close();
+    if (qry.lastError().isValid()) {
+        qDebug() << "Error = " << qry.lastError().text();
+    } else {
+        qDebug() << "Record Inserted";
     }
+
+    db.close();
 }
 
-
-void SomeClass::addNewUser(QString newUser, QString newPassword)
-{
-    QSqlDatabase sqlitedb = QSqlDatabase::addDatabase("QSQLITE");
-    qDebug() << Database_path;
-    sqlitedb.setDatabaseName(Database_path);
-
-    if (!sqlitedb.open()) {
-        qDebug() << "Error = " << sqlitedb.lastError().text();
+void SomeClass::addNewUser(QString newUser, QString newPassword) {
+    QSqlDatabase db = openDatabase();
+    if (!db.isOpen()) {
+        return;
     }
-    else {
-        qDebug() << "Database is opened";
 
-        QString username = newUser;
-        QString password = newPassword;
+    QString username = newUser;
+    QString password = newPassword;
 
-        QString sQuery = "INSERT INTO users (username, password) VALUES (:username, :password)";
+    QString sQuery = "INSERT INTO users (username, password) VALUES (:username, :password)";
 
-        QSqlQuery qry;
-        qry.prepare(sQuery);
+    QSqlQuery qry(db);
+    qry.prepare(sQuery);
+    qry.bindValue(":username", username);
+    qry.bindValue(":password", password);
+    qry.exec();
 
-        qry.bindValue(":username", username);
-        qry.bindValue(":password", password);
-        qry.exec();
-
-        if (qry.lastError().isValid()) {
-            qDebug() << "Error = " << qry.lastError().text();
-        }
-        else {
-            qDebug() << "Record Inserted";
-        }
-
-        qDebug() << "Closing..";
-        sqlitedb.close();
+    if (qry.lastError().isValid()) {
+        qDebug() << "Error = " << qry.lastError().text();
+    } else {
+        qDebug() << "Record Inserted";
     }
+
+    db.close();
 }
 
-void SomeClass::addNewRocket(QString rocketName, QString commandName, QString commandData)
-{
-    QSqlDatabase sqlitedb = QSqlDatabase::addDatabase("QSQLITE");
-    qDebug() << Database_path;
-    sqlitedb.setDatabaseName(Database_path);
-
-    if (!sqlitedb.open()) {
-        qDebug() << "Error = " << sqlitedb.lastError().text();
+void SomeClass::addNewRocket(QString rocketName, QString commandName, QString commandData) {
+    QSqlDatabase db = openDatabase();
+    if (!db.isOpen()) {
+        return;
     }
-    else {
-        qDebug() << "Database is opened";
 
-        QString rocketN = rocketName;
-        QString commandN = commandName;
-        QString commandD = commandData;
+    QString rocketN = rocketName;
+    QString commandN = commandName;
+    QString commandD = commandData;
 
-        QString sQuery = "INSERT INTO commands (launch_type,command_name,command) VALUES (:launch_type, :command_name,:command)";
+    QString sQuery = "INSERT INTO commands (launch_type, command_name, command) VALUES (:launch_type, :command_name, :command)";
 
-        QSqlQuery qry;
-        qry.prepare(sQuery);
+    QSqlQuery qry(db);
+    qry.prepare(sQuery);
+    qry.bindValue(":launch_type", rocketN);
+    qry.bindValue(":command_name", commandN);
+    qry.bindValue(":command", commandD);
+    qry.exec();
 
-        qry.bindValue(":launch_type", rocketN);
-        qry.bindValue(":command_name",commandN);
-        qry.bindValue(":command",commandD);
-        qry.exec();
-
-        if (qry.lastError().isValid()) {
-            qDebug() << "Error = " << qry.lastError().text();
-        }
-        else {
-            qDebug() << "Record Inserted";
-        }
-
-        qDebug() << "Closing..";
-        sqlitedb.close();
+    if (qry.lastError().isValid()) {
+        qDebug() << "Error = " << qry.lastError().text();
+    } else {
+        qDebug() << "Record Inserted";
     }
+
+    db.close();
 }
-
-
-
-
-
-
-void SomeClass::connectDB(){
-
-    QSqlDatabase sqlitedb = QSqlDatabase::addDatabase("QSQLITE");
-    sqlitedb.setDatabaseName(Database_path);
-
-    if(!sqlitedb.open()){
-        qDebug() << "Error = " << sqlitedb.lastError().text();
-    }
-    else{
-        qDebug() << "Database is opened";
-
-        QString send = "11110101101010101110000011110000101011111010101111111111";
-        QString length = "11110101";
-        QString packet = "10101010";
-        QString destination = "11100000";
-        QString source = "11110000";
-        QString command = "10101111";
-        QString data = "10101011";
-        QString checksum = "11111111";
-        QString time = "STRFTIME('%Y-%m-%d %H:%M:%f', 'now', 'localtime')";
-
-        QString sQuery = "INSERT INTO communicatie_protocol (Send_data, Length_byte, Packet_byte, Destination_byte, Source_byte, Command_byte, Data_bytes, Checksum_byte, timestamp) VALUES (:Send_data, :Length_byte, :Packet_byte, :Destination_byte, :Source_byte, :Command_byte, :Data_bytes, :Checksum_byte, datetime('now','localtime'));";
-
-
-        QSqlQuery qry;
-        qry.prepare(sQuery);
-
-        qry.bindValue(":Send_data", send);
-        qry.bindValue(":Length_byte", length);
-        qry.bindValue(":Packet_byte", packet);
-        qry.bindValue(":Destination_byte", destination);
-        qry.bindValue(":Source_byte", source);
-        qry.bindValue(":Command_byte", command);
-        qry.bindValue(":Data_bytes", data);
-        qry.bindValue(":Checksum_byte", checksum);
-        qry.bindValue(":Time", time);
-        qry.exec();
-
-        if(qry.exec()){
-            qDebug() << "Record Inserted";
-        }
-        else{
-            if((qry.lastError().isValid())){
-                qDebug() << "Error = " << qry.lastError().text();
-            }
-        }
-        qDebug() << "Closing..";
-        sqlitedb.close();
-    }
-}
-
-
-
-
 
 

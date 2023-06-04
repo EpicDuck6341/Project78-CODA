@@ -8,7 +8,7 @@ import QtQuick.Controls 2.15
 
 Page{
 
-    function switchPage(pageInput) {
+    function switchPage(pageInput) { //Function for switching pages with path to .qml file as parameter
         // Laad het object van een page in een variabele
         var pageObject = Qt.createComponent(pageInput)
 
@@ -30,7 +30,7 @@ Page{
         }
     }
 
-    function checkLogin(){
+    function checkLogin(){ //Checks if login is filled in, then checks if it matches in the database
         if(classA.getUserLogin(usernameInput.text,passwordInput.text)===true){
             switchPage("Dashboard.qml")
             classA.setCurrentUser(usernameInput.text)
@@ -117,7 +117,7 @@ Page{
 
             TextField {
                 id: passwordInput
-                onTextChanged: if (length > 15) remove(15, length);
+                onTextChanged: if (length > 15) remove(15, length); //Max character limit of 15. Maybe useless
                 anchors.horizontalCenter: parent.horizontalCenter
                 echoMode: TextInput.Password
                 y: 460
@@ -143,14 +143,14 @@ Page{
             Button {
                 id: button
                 anchors.horizontalCenter: parent.horizontalCenter
-                flat: false // set to false to show the button border and background
+                flat: false
                 y: 550
                 width: 150
                 height: 45
                 text: qsTr("Login")
                 display: AbstractButton.TextOnly
                 background: Rectangle {
-                    color: classA.getColourComponent(5) // set the button background color to a muted blue-gray
+                    color: classA.getColourComponent(5)
                     border.width: 2
                     border.color: classA.getColourComponent(5)
                     radius: 10
